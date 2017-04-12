@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +109,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -144,7 +143,6 @@ return [
         Classmate\Providers\AuthServiceProvider::class,
         Classmate\Providers\EventServiceProvider::class,
         Classmate\Providers\RouteServiceProvider::class,
-
     ],
 
     /*

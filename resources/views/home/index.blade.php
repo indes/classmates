@@ -6,7 +6,7 @@
             <div class="avatar-n">
                 <img src="./img/avatar.jpg" alt="头像" class="img-circle center-block">
             </div>
-            <h6 class="username">金轮法王</h6>
+            <h6 class="username">{{$username}}</h6>
 
             <div class="row" style="text-align: center">
                 <div class="col-md-4 col-xs-12">
@@ -37,10 +37,13 @@
             <p>
                 有什么新鲜事想告诉大家?
             </p>
-            <div class="form-group">
-                <textarea class="form-control" rows="4"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">发布</button>
+            <form class="form-horizontal" action="{{ url('/home') }}" method="post" role="form">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <textarea class="form-control" rows="4" name="pbinfo"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 90%">发布</button>
+            </form>
         </div>
 
 

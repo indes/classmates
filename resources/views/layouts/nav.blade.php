@@ -35,7 +35,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span> 张三
+                            <span class="glyphicon glyphicon-user"></span> {{$username}}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a></li>
