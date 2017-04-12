@@ -1,0 +1,72 @@
+.site-nav{
+    border-radius: 0px!important;
+}
+.navbar{
+    box-shadow: 0 0 1px 0px rgba(0,0,0,0.3), 0 0 6px 2px rgba(0,0,0,0.15);
+}
+
+
+body {
+    padding-top: 70px;
+    /*background-color:#bdc3c7;*/
+    /*background-image: url("../img/noise_lines.png");*/
+}
+
+
+.sidebar{
+    padding: 20px;
+    background-color: #eeeeee;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+/*nav*/
+.avatar-sm{
+    height: 22px;
+    width: 22px;
+}
+.card-n{
+    padding: 20px;
+    background-color: #eeeeee;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+
+/*sidebar info*/
+.avatar-n{
+    height: 105px;
+}
+.avatar-m{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.feed-avatar{
+    width: 50px;
+    height:50px;
+    float: left;
+}
+.feed-msg{
+    padding-left: 65px;
+}
+
+.avatar-n img{
+    width: 100px;
+    height: 100px;
+}
+.card-n .detail{
+    font-size: 0.9em;
+}
+.username{
+    text-align: center;
+    font-weight: bold;
+}
+.p-infonum{
+    margin-bottom: -10px;
+    font-size: 26px;
+    font-weight: bold;
+}

@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://localhost:8080',
 
     /*
     |--------------------------------------------------------------------------
@@ -140,10 +140,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Classmate\Providers\AppServiceProvider::class,
+        Classmate\Providers\AuthServiceProvider::class,
+        Classmate\Providers\EventServiceProvider::class,
+        Classmate\Providers\RouteServiceProvider::class,
 
     ],
 
