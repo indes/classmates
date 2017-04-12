@@ -2,6 +2,7 @@
 
 namespace Classmate\Http\Controllers\Home;
 
+use Classmate\Http\Model\Journal;
 use Illuminate\Http\Request;
 
 use Classmate\Http\Requests;
@@ -18,14 +19,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home/index');
+        return view('home/index')->with('username',session('username'));
         //
     }
 
     public function login()
     {
         return view('home/login');
-        
+
+    }
+
+    public function publish()
+    {
+        $pbinfo=Input::get('pbinfo');
+        $j=new Journal();
+        $j->jData= $pbinfo;
+        $j->jAuthorId=session('userid');
+        $j->jPublishDate=date("Y-m-d H:i:s");
+        $j->save();
+        return "发布成功";
     }
 
 

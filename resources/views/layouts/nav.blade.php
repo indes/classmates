@@ -35,18 +35,18 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span> {{$username}}
+                            <span class="glyphicon glyphicon-user"></span> {{ session('username') }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="{{'\home'}}">我的主页</a></li>
+                            <li><a href="#">我的动态</a></li>
+                            <li><a href="#">班级</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">信息设置</a>
+                            <li><a href="{{'\account\set\pwd'}}">修改密码</a></li>
+                            <li><a href="{{'\exit'}}">退出</a></li>
                         </ul>
                     </li>
-
-
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

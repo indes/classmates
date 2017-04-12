@@ -5,12 +5,13 @@ Route::group(['namespace' => 'Home'], function()
 {
     Route::group(['middleware'=>'uauth'],function (){
         Route::get('/home','HomeController@index')->name('home');
+        Route::post('home','HomeController@publish');
+        Route::get('/exit','AuthController@logout');
+
         Route::get('/',function (){
             return redirect()->route('home');
         });
     });
-
-
 
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login','AuthController@login');
@@ -25,19 +26,20 @@ Route::group(['namespace' => 'Home'], function()
             abort(404);
         });
 
-        Route::get('/exit','AuthController@logout');
     });
 
 });
 
-//Route::group(['prefix' => 'auth','namespace' => 'Home'], function () {
-//    Route::post('/login','HomeController@auth');
-//    Route::get('/login',function (){
-//        return view('home.login');
-//    });
-//});
+//account路由
+Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
+    Route::get('/set/pwd',function (){
+        return view('set.pwd');
+    });
+    Route::post('/set/pwd','AccountController@pwdset');
 
-//Route::get('/', 'home\HomeController@dbcn');
+});
+
+
 
 Route::get('/set',function (){
     session(['admin'=>123]);

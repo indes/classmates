@@ -18,8 +18,9 @@ class AuthController extends Controller
         if($i['password']){
             if($u=User::where('email','=',$i['email'])->first()){
                 if($u->password==md5($i['password'])){
-                                session(['userid'=>$u->id]);
-                                dd(session('userid'));
+                    session(['userid'=>$u->id,'username'=>$u->stuName]);
+                    return redirect()->route('home');
+
                 }else{
                     return redirect()->back()->withInput()->withErrors('用户名或密码错误！');
                 }
@@ -48,7 +49,6 @@ class AuthController extends Controller
                 //判断邮箱是否存在
                 if(!(User::where('email','=',$i['email'])->first())){
                     $u=new User;
-
                     //判断班级是否存在
                     if(($c=cmClass::where('className','=',$i['class'])->first())){
                         $u->stuClassId=$c->classid;
@@ -73,6 +73,6 @@ class AuthController extends Controller
             }
         }else{
             return redirect()->back()->withInput()->withErrors('所有的信息都要填写！');
-        };
+        }
     }
 }
