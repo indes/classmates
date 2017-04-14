@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">同学录</a>
+                <a class="navbar-brand" href="{{'/'}}">同学录</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </form>
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="{{'/'}}"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-inbox"></span>
                             通知
                             <span class="navbar-new">2</span>
@@ -42,7 +42,7 @@
                             <li><a href="#">我的动态</a></li>
                             <li><a href="#">班级</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">信息设置</a>
+                            <li><a href="{{'/account/set/profile'}}">信息设置</a>
                             <li><a href="{{'\account\set\pwd'}}">修改密码</a></li>
                             <li><a href="{{'\exit'}}">退出</a></li>
                         </ul>

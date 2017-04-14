@@ -32,10 +32,16 @@ Route::group(['namespace' => 'Home'], function()
 
 //account路由
 Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
-    Route::get('/set/pwd',function (){
-        return view('set.pwd');
+
+    Route::group(['prefix' => 'set'], function () {
+        Route::get('pwd',function (){
+            return view('set.pwd');
+        });
+
+        Route::post('pwd','AccountController@pwdset');
+        Route::any('profile','AccountController@profileset');
     });
-    Route::post('/set/pwd','AccountController@pwdset');
+
 
 });
 

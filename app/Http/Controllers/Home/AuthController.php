@@ -32,7 +32,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function logout()
     {
         if(session('userid')){
