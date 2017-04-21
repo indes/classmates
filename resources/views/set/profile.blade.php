@@ -5,8 +5,14 @@
         <div class="col-md-6 col-md-push-2">
 
             <form class="form-horizontal" action="{{ url('/account/set/profile') }}" method="post" role="form">
-                <legend>个人信息设置</legend>
+                <legend>个人资料修改</legend>
                 {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-3 control-label">头像</label>
+                    <div class="col-lg-9">
+                        <input type="file">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label">Email</label>
                     <div class="col-lg-9">
@@ -16,13 +22,13 @@
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">昵称</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="name" value="{{$user->userName}}">
+                        <input type="" class="form-control" name="name" value="{{$user->userName}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">个人简介</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="bio" value="{{$user->stuBio}}">
+                        <textarea class="form-control" rows="4" name="bio">{{$user->stuBio}}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -64,7 +70,6 @@
                 </div>
 
                 <div class="form-group">
-
                     <div class="col-lg-9 col-lg-offset-3">
                         <button type="reset" class="btn btn-default btn-sm">重填</button>
                         <button type="submit" class="btn btn-primary btn-sm">提交</button>

@@ -38,17 +38,17 @@
                             <span class="glyphicon glyphicon-user"></span> {{ session('username') }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{'\home'}}">我的主页</a></li>
+                            <li><a href="{{url('home')}}">我的主页</a></li>
                             <li><a href="#">我的动态</a></li>
-                            <li><a href="#">班级</a></li>
+                            <li><a href="{{url('class')}}">班级</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{'/account/set/profile'}}">信息设置</a>
-                            <li><a href="{{'\account\set\pwd'}}">修改密码</a></li>
-                            <li><a href="{{'\exit'}}">退出</a></li>
+                            <li><a href="{{url('account\set\profile')}}">资料修改</a>
+                            <li><a href="{{url('account\set\pwd')}}">修改密码</a></li>
+                            <li><a href="{{url('exit')}}">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
 </div>

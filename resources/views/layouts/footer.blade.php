@@ -4,7 +4,7 @@
 <!--</div>-->
 <!--</footer>-->
 </body>
-<script src="./js/application.js"></script>
+<script src="{{url('js/application.js')}}"></script>
 <script>
     jQuery(function($) {
         $(document).ready( function() {

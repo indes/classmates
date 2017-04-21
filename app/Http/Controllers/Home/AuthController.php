@@ -18,7 +18,8 @@ class AuthController extends Controller
         if($i['password']){
             if($u=User::where('email','=',$i['email'])->first()){
                 if($u->password==md5($i['password'])){
-                    session(['userid'=>$u->id,'username'=>$u->stuName]);
+                    session(['userid'=>$u->id,'username'=>$u->stuName,'classid'=>$u->stuClassId]);
+//                    session(['user'=>$u]);
                     return redirect()->route('home');
 
                 }else{

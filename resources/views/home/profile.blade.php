@@ -86,31 +86,27 @@
             <div class="sidebar">
                 <div class="infobox">
                     <div class="avatar-n">
-                        <img src="./img/avatar.jpg" alt="头像" class="img-circle center-block">
+                        <img src="{{url('img/avatar.jpg')}}" alt="头像" class="img-circle center-block">
                     </div>
                     <h6 class="username">金轮法王</h6>
-
                     <div class="row" style="text-align: center">
                         <div class="col-md-4 col-xs-12">
                             <a href="#">
                                 <p class="p-infonum">8</p>
                                 动态
                             </a>
-
                         </div>
                         <div class="col-md-4 col-xs-12">
                             <a href="#">
                                 <p class="p-infonum">34</p>
                                 同学
                             </a>
-
                         </div>
                         <div class="col-md-4 col-xs-12">
                             <a href="#">
                                 <p class="p-infonum">100</p>
                                 好友
                             </a>
-
                         </div>
                     </div>
 

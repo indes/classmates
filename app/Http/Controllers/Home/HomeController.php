@@ -4,7 +4,7 @@ namespace Classmate\Http\Controllers\Home;
 
 use Classmate\Http\Model\Journal;
 use Illuminate\Http\Request;
-
+use Classmate\Http\Model\User;
 use Classmate\Http\Requests;
 use Classmate\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +17,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=null)
     {
-        return view('home/index')->with('username',session('username'));
+        if(isset($id)){
+            return view('/home/index')->withUser(User::find($id));
+        }else{
+            return view('home/index')->withUser(User::find(session('userid')));
+        }
+
         //
     }
 

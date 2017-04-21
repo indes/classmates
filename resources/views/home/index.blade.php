@@ -4,19 +4,19 @@
     <div class="sidebar">
         <div class="infobox">
             <div class="avatar-n">
-                <img src="./img/avatar.jpg" alt="头像" class="img-circle center-block">
+                <img src="{{url('img/avatar.jpg')}}" alt="头像" class="img-circle center-block">
             </div>
-            <h6 class="username">{{$username}}</h6>
+            <h6 class="username">{{$user->userName}}</h6>
 
             <div class="row" style="text-align: center">
                 <div class="col-md-4 col-xs-12">
-                    <a href="#">
+                    <a href="{{url('home')}}">
                         <p class="p-infonum">8</p>
                         动态
                     </a>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <a href="#">
+                    <a href="{{url('class')}}">
                         <p class="p-infonum">34</p>
                         同学
                     </a>
@@ -24,14 +24,13 @@
                 <div class="col-md-4 col-xs-12">
                     <a href="#">
                         <p class="p-infonum">100</p>
-                        好友
+                        文件
                     </a>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
 @section('content')
         <div class="card-n">
             <p>
@@ -45,8 +44,6 @@
                 <button type="submit" class="btn btn-primary" style="margin-left: 90%">发布</button>
             </form>
         </div>
-
-
         <div class="card-n">
             <div class="feed-detail">
                 <div class="authorinfo">

@@ -4,8 +4,8 @@
 Route::group(['namespace' => 'Home'], function()
 {
     Route::group(['middleware'=>'uauth'],function (){
-        Route::get('/home','HomeController@index')->name('home');
-        Route::post('home','HomeController@publish');
+        Route::get('/home/{id?}','HomeController@index')->name('home');
+        Route::post('/home','HomeController@publish');
         Route::get('/exit','AuthController@logout');
 
         Route::get('/',function (){
@@ -41,8 +41,10 @@ Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
         Route::post('pwd','AccountController@pwdset');
         Route::any('profile','AccountController@profileset');
     });
+});
 
-
+Route::group(['prefix' => 'class','middleware'=>'uauth'], function () {
+    Route::get('/','cmClassController@index');
 });
 
 
