@@ -18,9 +18,10 @@ class cmClassController extends Controller
      */
     public function index()
     {
-
-        $c=cmClass::find(session('classid'));
-        $c->members=User::where('stuClassId',session('classid'))->get();
+//        dd(session('user')->stuClassId);
+        $c=cmClass::find(session('user')->stuClassId);
+        $c->members=User::where('stuClassId',session('user')->stuClassId)->get();
+//        dd($c);
         return view('class.index')->withClass($c);
     }
 

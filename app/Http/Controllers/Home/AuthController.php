@@ -18,8 +18,9 @@ class AuthController extends Controller
         if($i['password']){
             if($u=User::where('email','=',$i['email'])->first()){
                 if($u->password==md5($i['password'])){
-                    session(['userid'=>$u->id,'username'=>$u->stuName,'classid'=>$u->stuClassId]);
-//                    session(['user'=>$u]);
+//                    session(['userid'=>$u->id,'username'=>$u->stuName,'classid'=>$u->stuClassId]);
+
+                    session(['user'=>$u]);
                     return redirect()->route('home');
 
                 }else{
@@ -35,8 +36,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        if(session('userid')){
-            session(['userid'=>null]);
+        if(session('user')){
+            session(['user'=>null]);
             return "退出成功";
         }
     }

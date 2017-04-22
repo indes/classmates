@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </form>
-                    <li class="active"><a href="{{'/'}}"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-inbox"></span>
                             通知
                             <span class="navbar-new">2</span>
@@ -35,7 +35,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span> {{ session('username') }}
+                            <span class="glyphicon glyphicon-user"></span> {{ session('user')->username }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('home')}}">我的主页</a></li>

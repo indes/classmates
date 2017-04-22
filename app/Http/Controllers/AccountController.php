@@ -28,7 +28,7 @@ class AccountController extends Controller
         if($i['oldpassword']){
             if($i['newpassword']&&$i['rnewpassword']){
                 if($i['newpassword']==$i['rnewpassword']){
-                    $u=User::where('id','=',session('userid'))->first();
+                    $u=User::find(session('user')->id);
                     if(md5($i['oldpassword'])==$u->password){
                         $u->password=md5($i['newpassword']);
                         $u->save();
@@ -67,7 +67,7 @@ class AccountController extends Controller
         if ($request->isMethod('get')) {
             //
 //            $u=User::where('id','=',session('userid'))->first();
-            $u=User::find(session('userid'));
+            $u=User::find(session('user')->id);
             $c=cmClass::find($u->stuClassId);
             return view('set.profile')->withUser($u)->withClass($c);
         };

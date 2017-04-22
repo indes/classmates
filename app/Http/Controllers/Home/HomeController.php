@@ -19,12 +19,10 @@ class HomeController extends Controller
      */
     public function index($id=null)
     {
-        if(isset($id)){
-            return view('/home/index')->withUser(User::find($id));
-        }else{
-            return view('home/index')->withUser(User::find(session('userid')));
-        }
-
+        if(!isset($id)) $id=session('user')->id;
+        $u=User::find($id);
+        $j=Journal::where('jAuthorId',$id)->get();
+        return view('home/index')->withUser($u)->withJournal($j);
         //
     }
 
