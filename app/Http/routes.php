@@ -1,6 +1,10 @@
 <?php
 
 
+Route::get('/','IndexController@index');
+
+
+
 Route::group(['namespace' => 'Home'], function()
 {
     Route::group(['middleware'=>'uauth'],function (){
@@ -8,9 +12,6 @@ Route::group(['namespace' => 'Home'], function()
         Route::post('/home','HomeController@publish');
         Route::get('/exit','AuthController@logout');
 
-        Route::get('/',function (){
-            return redirect()->route('home');
-        });
     });
 
     Route::group(['prefix' => 'auth'], function () {

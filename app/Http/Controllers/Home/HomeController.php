@@ -22,7 +22,9 @@ class HomeController extends Controller
         if(!isset($id)) $id=session('user')->id;
         $u=User::find($id);
         $j=Journal::where('jAuthorId',$id)->get();
-        return view('home/index')->withUser($u)->withJournal($j);
+        $j->count=$j->count();
+//        dd($j->count);
+        return view('home/home')->withUser($u)->withJournal($j)->with('jqw','123');
         //
     }
 
