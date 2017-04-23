@@ -1,8 +1,10 @@
 <?php
 
 
-Route::get('/','IndexController@index');
 
+Route::group(['middleware'=>'uauth'],function (){
+    Route::get('/','IndexController@index');
+});
 
 
 Route::group(['namespace' => 'Home'], function()

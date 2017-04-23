@@ -39,7 +39,7 @@ class HomeController extends Controller
         $pbinfo=Input::get('pbinfo');
         $j=new Journal();
         $j->jData= $pbinfo;
-        $j->jAuthorId=session('userid');
+        $j->jAuthorId=session('user')->id;
         $j->jPublishDate=date("Y-m-d H:i:s");
         $j->save();
         return "发布成功";

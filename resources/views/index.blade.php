@@ -47,90 +47,35 @@
     </div>
 
 
-    <div class="card-n">
-        <div class="feed-detail">
-            <div class="authorinfo">
-                <div class="feed-avatar">
-                    <img src="./img/avatar.jpg" alt="" class="avatar-m">
-                </div>
-                <div class="feed-msg">
-                    <p>
-                        <strong><a href="#">马化腾</a></strong>
-                        <br>
-                        <small>发布于 2015/12/12 12:12</small>
-                    </p>
+
+    {{--{{dd($journals)}}--}}
+    @if($journals)
+        @foreach($journals as $journal)
+
+            <div class="card-n">
+                <div class="feed-detail">
+                    <div class="authorinfo">
+                        <div class="feed-avatar">
+                            <img src="{{url('img/avatar.jpg')}}" alt="" class="avatar-m">
+                        </div>
+                        <div class="feed-msg">
+                            <p>
+                                <strong><a href="{{url('home')}}/$journal->id">{{$journal->userName}}</a></strong>
+                                <br>
+                                <small>发布于 {{$journal->jPublishDate}}</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        {{$journal->jData}}
+                    </div>
                 </div>
             </div>
 
-            <div class="detail">
-                <samp>This text is meant to be treated as sample output from a computer program.</samp>
-                【混音后期必备-一节课教你使用压缩器】压缩无论在混音还是在编曲中，都是必用的效果器之一，那么压缩器是如何使用的？如何根据不同的情况使用不同的压缩器？4月9号晚上8点，由混音班讲师彭彭为你揭秘！上课地址
-            </div>
-        </div>
-    </div>
-    <div class="card-n">
-        <div class="feed-detail">
-            <div class="authorinfo">
-                <div class="feed-avatar">
-                    <img src="./img/avatar.jpg" alt="" class="avatar-m">
-                </div>
-                <div class="feed-msg">
-                    <p>
-                        <strong><a href="#">马化腾</a></strong>
-                        <br>
-                        <small>发布于 2015/12/12 12:12</small>
-                    </p>
-                </div>
-            </div>
+        @endforeach
+    @endif
 
-            <div class="detail">
-                <samp>This text is meant to be treated as sample output from a computer program.</samp>
-                【混音后期必备-一节课教你使用压缩器】压缩无论在混音还是在编曲中，都是必用的效果器之一，那么压缩器是如何使用的？如何根据不同的情况使用不同的压缩器？4月9号晚上8点，由混音班讲师彭彭为你揭秘！上课地址
-            </div>
-        </div>
-    </div>
-    <div class="card-n">
-        <div class="feed-detail">
-            <div class="authorinfo">
-                <div class="feed-avatar">
-                    <img src="./img/avatar.jpg" alt="" class="avatar-m">
-                </div>
-                <div class="feed-msg">
-                    <p>
-                        <strong><a href="#">马化腾</a></strong>
-                        <br>
-                        <small>发布于 2015/12/12 12:12</small>
-                    </p>
-                </div>
-            </div>
-
-            <div class="detail">
-                <samp>This text is meant to be treated as sample output from a computer program.</samp>
-                【混音后期必备-一节课教你使用压缩器】压缩无论在混音还是在编曲中，都是必用的效果器之一，那么压缩器是如何使用的？如何根据不同的情况使用不同的压缩器？4月9号晚上8点，由混音班讲师彭彭为你揭秘！上课地址
-            </div>
-        </div>
-    </div>
-    <div class="card-n">
-        <div class="feed-detail">
-            <div class="authorinfo">
-                <div class="feed-avatar">
-                    <img src="./img/avatar.jpg" alt="" class="avatar-m">
-                </div>
-                <div class="feed-msg">
-                    <p>
-                        <strong><a href="#">马化腾</a></strong>
-                        <br>
-                        <small>发布于 2015/12/12 12:12</small>
-                    </p>
-                </div>
-            </div>
-
-            <div class="detail">
-                <samp>This text is meant to be treated as sample output from a computer program.</samp>
-                【混音后期必备-一节课教你使用压缩器】压缩无论在混音还是在编曲中，都是必用的效果器之一，那么压缩器是如何使用的？如何根据不同的情况使用不同的压缩器？4月9号晚上8点，由混音班讲师彭彭为你揭秘！上课地址
-            </div>
-        </div>
-    </div>
 
 
     <div>

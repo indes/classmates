@@ -1,7 +1,7 @@
 <?php
 
 namespace Classmate\Http\Controllers;
-
+use DB;
 use Classmate\Http\Model\Journal;
 use Classmate\Http\Model\User;
 
@@ -19,9 +19,18 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $u=User::where('stuClassId',session('user')->stuClassId)->get();
-//        dd($u);
-        return view('index')->withUser(session('user'));
+//        return "hello";
+//        $u=User::where('stuClassId',session('user')->stuClassId)->get();
+
+        //从数据库中取出相关动态
+        $j=DB::table('cm_journal')
+            ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
+            ->where('stuClassId',session('user')->stuClassId)
+            ->orderBy('jPublishDate', 'desc')
+            ->get();
+
+//        dd($j);
+        return view('index')->withUser(session('user'))->withJournals($j);
 
     }
 
