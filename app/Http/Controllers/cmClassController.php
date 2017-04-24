@@ -32,6 +32,7 @@ class cmClassController extends Controller
      */
     public function index()
     {
+        dd($_GET['asd']);
         return view('class.index')->withClass($this->c);
     }
 

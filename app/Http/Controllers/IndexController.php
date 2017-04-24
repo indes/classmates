@@ -1,6 +1,7 @@
 <?php
 
 namespace Classmate\Http\Controllers;
+use Classmate\Http\Model\cmClass;
 use DB;
 use Classmate\Http\Model\Journal;
 use Classmate\Http\Model\User;
@@ -39,64 +40,26 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search()
     {
-        //
+        if(isset($_GET['q'])){
+
+            $res['key']=$_GET['q'];
+            $q='%'.$_GET['q'].'%';
+//            dd($q);
+
+            $res['u']=User::where('stuName','like',$q)->get();
+            $res['c']=cmClass::where('className','like',$q)->get();
+            $res['j']=collect(DB::table('cm_journal')
+                ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
+                ->where('jData','like',$q)
+                ->orderBy('jPublishDate', 'desc')
+                ->get());
+            return view('index.search')->withRes($res);
+        }else{
+            return "请输入关键词";
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
