@@ -10,13 +10,13 @@
 
             <div class="row" style="text-align: center">
                 <div class="col-md-4 col-xs-12">
-                    <a href="#">
+                    <a href="{{url('home')}}">
                         <p class="p-infonum">8</p>
                         动态
                     </a>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <a href="#">
+                    <a href="{{url('class')}}">
                         <p class="p-infonum">34</p>
                         同学
                     </a>
@@ -46,9 +46,6 @@
         </form>
     </div>
 
-
-
-    {{--{{dd($journals)}}--}}
     @if($journals)
         @foreach($journals as $journal)
 
@@ -60,7 +57,7 @@
                         </div>
                         <div class="feed-msg">
                             <p>
-                                <strong><a href="{{url('home')}}/$journal->id">{{$journal->userName}}</a></strong>
+                                <strong><a href="{{url('home')}}/{{$journal->id}}">{{$journal->userName}}</a></strong>
                                 <br>
                                 <small>发布于 {{$journal->jPublishDate}}</small>
                             </p>

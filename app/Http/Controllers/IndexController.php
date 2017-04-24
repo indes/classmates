@@ -30,7 +30,7 @@ class IndexController extends Controller
             ->get();
 
 //        dd($j);
-        return view('index')->withUser(session('user'))->withJournals($j);
+        return view('index.index')->withUser(session('user'))->withJournals($j);
 
     }
 

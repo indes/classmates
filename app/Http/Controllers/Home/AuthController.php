@@ -21,7 +21,7 @@ class AuthController extends Controller
 //                    session(['userid'=>$u->id,'username'=>$u->stuName,'classid'=>$u->stuClassId]);
 
                     session(['user'=>$u]);
-                    return redirect()->route('home');
+                    return redirect()->route('index');
 
                 }else{
                     return redirect()->back()->withInput()->withErrors('用户名或密码错误！');

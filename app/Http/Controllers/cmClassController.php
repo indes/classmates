@@ -8,9 +8,23 @@ use Illuminate\Http\Request;
 
 use Classmate\Http\Requests;
 use Classmate\Http\Controllers\Controller;
+use DB;
 
 class cmClassController extends Controller
 {
+    public $c;
+
+    function __construct(){
+        $this->c=cmClass::find(session('user')->stuClassId);
+        $this->c->members=User::where('stuClassId',session('user')->stuClassId)->get();
+        $j=collect(DB::table('cm_journal')
+            ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
+            ->where('stuClassId',session('user')->stuClassId)
+            ->orderBy('jPublishDate', 'desc')
+            ->get());
+        $this->c->Journals=$j;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,11 +32,12 @@ class cmClassController extends Controller
      */
     public function index()
     {
-//        dd(session('user')->stuClassId);
-        $c=cmClass::find(session('user')->stuClassId);
-        $c->members=User::where('stuClassId',session('user')->stuClassId)->get();
-//        dd($c);
-        return view('class.index')->withClass($c);
+        return view('class.index')->withClass($this->c);
+    }
+
+    public function mbr()
+    {
+        return view('class.member')->withClass($this->c);
     }
 
 }

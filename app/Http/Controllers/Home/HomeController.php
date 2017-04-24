@@ -30,8 +30,8 @@ class HomeController extends Controller
 
     public function login()
     {
-        return view('home/login');
 
+        return view('home/login');
     }
 
     public function publish()
@@ -44,6 +44,5 @@ class HomeController extends Controller
         $j->save();
         return "发布成功";
     }
-
 
 }

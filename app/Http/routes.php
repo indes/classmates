@@ -3,7 +3,7 @@
 
 
 Route::group(['middleware'=>'uauth'],function (){
-    Route::get('/','IndexController@index');
+    Route::get('/','IndexController@index')->name('index');
 });
 
 
@@ -48,6 +48,8 @@ Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
 
 Route::group(['prefix' => 'class','middleware'=>'uauth'], function () {
     Route::get('/','cmClassController@index');
+    Route::get('/members','cmClassController@mbr');
+
 });
 
 
