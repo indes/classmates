@@ -6,7 +6,7 @@
             <div class="avatar-n">
                 <img src="{{url('img/avatar.jpg')}}" alt="头像" class="img-circle center-block">
             </div>
-            <h6 class="username">{{$user->userName}}</h6>
+            <h6 class="username">{{$user->stuName}}{{$user->userName?'('.$user->userName.')':''}}</h6>
 
             <div class="row" style="text-align: center">
                 <div class="col-md-4 col-xs-12">
@@ -71,24 +71,8 @@
 
 
         <div>
-            <ul class="pagination">
-                <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
-                <li class="active"><a href="#fakelink">1</a></li>
-                <li><a href="#fakelink">2</a></li>
-                <li><a href="#fakelink">3</a></li>
-                <li><a href="#fakelink">4</a></li>
-                <li class="pagination-dropdown dropup">
-                    <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fui-triangle-up"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#fakelink">10–20</a></li>
-                        <li><a href="#fakelink">20–30</a></li>
-                        <li><a href="#fakelink">40–50</a></li>
-                    </ul>
-                </li>
-                <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
-            </ul>
+            {!! $journal->render() !!}
+
         </div>
 @endsection
 

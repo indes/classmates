@@ -21,8 +21,8 @@ class HomeController extends Controller
     {
         if(!isset($id)) $id=session('user')->id;
         $u=User::find($id);
-        $j=Journal::where('jAuthorId',$id)->get();
-        $j->count=$j->count();
+        $j=Journal::where('jAuthorId',$id)->paginate(6);;
+        $j->count=Journal::where('jAuthorId',$id)->get()->count();
 //        dd($j->count);
         return view('home/home')->withUser($u)->withJournal($j)->with('jqw','123');
         //
