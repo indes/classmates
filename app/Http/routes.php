@@ -5,6 +5,7 @@
 Route::group(['middleware'=>'uauth'],function (){
     Route::get('/','IndexController@index')->name('index');
     Route::get('/search','IndexController@search')->name('index');
+    Route::get('/rdct','IndexController@rd');
 
 });
 

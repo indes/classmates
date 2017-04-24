@@ -20,17 +20,18 @@ class IndexController extends Controller
      */
     public function index()
     {
-
-
         //从数据库中取出相关动态
         $j=DB::table('cm_journal')
             ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
             ->where('stuClassId',session('user')->stuClassId)
             ->orderBy('jPublishDate', 'desc')
             ->paginate(6);
-
         return view('index.index')->withUser(session('user'))->withJournals($j);
+    }
 
+    public function rd()
+    {
+        return view('index.redirect');
     }
 
     /**
@@ -44,8 +45,6 @@ class IndexController extends Controller
 
             $res['key']=$_GET['q'];
             $q='%'.$_GET['q'].'%';
-//            dd($q);
-
             $res['u']=User::where('stuName','like',$q)->get();
             $res['c']=cmClass::where('className','like',$q)->get();
             $res['j']=collect(DB::table('cm_journal')
