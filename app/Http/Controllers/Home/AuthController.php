@@ -65,7 +65,7 @@ class AuthController extends Controller
                     $u->email=$i['email'];
                     $u->password=md5($i['Password']);
                     $u->save();
-                    return "<h1>注册成功</h1>";
+                    return view('index.redirect')->withRdurl(url('auth/login'))->withMsg('注册成功！');
                 }else{
                     return redirect()->back()->withInput()->withErrors('该邮箱已经注册！');
                 }

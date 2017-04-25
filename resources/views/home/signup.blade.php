@@ -48,7 +48,7 @@
                 <div class="form-group">
 
                     <div class="col-lg-9 col-lg-offset-3">
-                        <button type="reset" class="btn btn-default btn-sm">重填</button>
+                        <a href="{{url('auth/login')}}" class="btn btn-info btn-sm">已有账号？登录</a>
                         <button type="submit" class="btn btn-primary btn-sm">提交</button>
                         @if (count($errors) > 0)
                             <span id="helpBlock" class="help-block text-danger" style="color: red">{!! implode('<br>', $errors->all()) !!}</span>

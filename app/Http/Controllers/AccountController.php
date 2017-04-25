@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
@@ -52,7 +48,12 @@ class AccountController extends Controller
         if ($request->isMethod('post')) {
             //
             $i=Input::get();
-            $u=User::find(session('userid'));
+
+
+
+            $u=User::find(session('user')->id);
+            $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
+
             $u->userName=$i['name'];
             $u->stuBio=$i['bio'];
             $u->stuName=$i['rname'];
@@ -62,11 +63,11 @@ class AccountController extends Controller
             $u->stuNum=$i['stunum'];
             $u->email=$i['email'];
             $u->save();
-            dd($u);
+            return view('index.redirect')->withRdurl(url('home'))->withMsg("修改成功！");
+
         };
         if ($request->isMethod('get')) {
-            //
-//            $u=User::where('id','=',session('userid'))->first();
+
             $u=User::find(session('user')->id);
             $c=cmClass::find($u->stuClassId);
             return view('set.profile')->withUser($u)->withClass($c);

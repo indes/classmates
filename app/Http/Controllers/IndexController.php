@@ -13,11 +13,7 @@ use Classmate\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //从数据库中取出相关动态
@@ -29,23 +25,20 @@ class IndexController extends Controller
         return view('index.index')->withUser(session('user'))->withJournals($j);
     }
 
+
     public function rd()
     {
-        return view('index.redirect');
+        return view('index.redirect')->withMsg("跳转页面");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function search()
     {
-        if(isset($_GET['q'])){
+        if(isset($_GET['q'])&&$_GET['q']!=''){
 
             $res['key']=$_GET['q'];
             $q='%'.$_GET['q'].'%';
-            $res['u']=User::where('stuName','like',$q)->get();
+            $res['u']=User::where('stuName','like',$q)->orWhere('userName','like',$q)->get();
             $res['c']=cmClass::where('className','like',$q)->get();
             $res['j']=collect(DB::table('cm_journal')
                 ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
@@ -54,9 +47,15 @@ class IndexController extends Controller
                 ->get());
             return view('index.search')->withRes($res);
         }else{
-            return "请输入关键词";
+            return view('index.redirect')->withMsg("请输入关键词！")->withRdurl(url('/'));
         }
     }
 
+    public function test()
+    {
+        $u=User::where('id',11)->get();
+        Header( "Content-type: image/gif");
+        echo $u[0]->stuImg;
+    }
 
 }

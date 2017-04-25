@@ -4,8 +4,9 @@
 
 Route::group(['middleware'=>'uauth'],function (){
     Route::get('/','IndexController@index')->name('index');
-    Route::get('/search','IndexController@search')->name('index');
+    Route::get('/search','IndexController@search');
     Route::get('/rdct','IndexController@rd');
+    Route::resource('avatar','AvatarController');
 
 });
 
@@ -62,6 +63,5 @@ Route::get('/set',function (){
     return 123;
 });
 
-Route::get('/get',['middleware'=>'user',function(){
-    return 'Admin';
-}]);
+Route::get('/get','indexController@test');
+

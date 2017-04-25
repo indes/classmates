@@ -19,7 +19,7 @@
                     <form class="navbar-form navbar-left" action="{{url('search')}}" role="search">
                         <div class="form-group">
                             <div class="input-group">
-                                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" name="q">
+                                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" name="q" required="required">
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn"><span class="fui-search"></span></button>
                                  </span>

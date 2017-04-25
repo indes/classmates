@@ -26,8 +26,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default btn-sm">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <a href="{{url('auth/signup')}}" class="btn btn-info btn-sm">注册</a>
+                            <button type="submit" class="btn btn-primary btn-sm">登录</button>
                         </div>
                     </div>
             </form>

@@ -21,16 +21,14 @@ class HomeController extends Controller
     {
         if(!isset($id)) $id=session('user')->id;
         $u=User::find($id);
-        $j=Journal::where('jAuthorId',$id)->paginate(6);;
+        $j=Journal::where('jAuthorId',$id)->orderBy('jPublishDate', 'desc')->paginate(6);
         $j->count=Journal::where('jAuthorId',$id)->get()->count();
-//        dd($j->count);
-        return view('home/home')->withUser($u)->withJournal($j)->with('jqw','123');
+        return view('home/home')->withUser($u)->withJournal($j);
         //
     }
 
     public function login()
     {
-
         return view('home/login');
     }
 
@@ -42,7 +40,7 @@ class HomeController extends Controller
         $j->jAuthorId=session('user')->id;
         $j->jPublishDate=date("Y-m-d H:i:s");
         $j->save();
-        return "发布成功";
+        return view('index.redirect')->withMsg("发布成功！")->withRdurl(url('/'));
     }
 
 }

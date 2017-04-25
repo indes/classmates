@@ -1,30 +1,43 @@
-@extends('layouts.full')
+@include('layouts.head')
 
-@section('content')
-    <script  type="text/javascript">
+<main class="container">
+    <div class="row">
+        <div class="col-md-12" role="main">
 
-        function delayURL(url) {
-            var delay = document.getElementById("time").innerHTML;
-            if (delay > 0) {
-                delay--;
-                document.getElementById("time").innerHTML = delay
-            } else {
-                window.top.location.href = url
-            }
-            setTimeout("delayURL('" + url + "')", 1000)
-        }
 
-    </script>
+            <META HTTP-EQUIV="REFRESH" CONTENT="5; URL={{$rdurl or url('/')}}">
+            <script  type="text/javascript">
 
-    <span id="time" style="background: red;font-size:18px;">8</span>
+                function delayURL(url) {
+                    var delay = document.getElementById("time").innerHTML;
+                    if (delay > 0) {
+                        delay--;
+                        document.getElementById("time").innerHTML = delay
+                    } else {
+                        {{--window.top.location.href = url--}}
+                    }
+                    setTimeout("delayURL('" + url + "')", 1000)
+                }
 
-    秒钟之后自动跳转，如果不跳转，请点击下面链接
+            </script>
+            <div class="text-center" style="padding-top: 40px">
 
-    <a href="{{$rdurl or url('/')}}">主题列表</a>
+                <h4>{{$msg}}</h4>
+                <span id="time" style="color: red;">5</span>
+                秒钟之后页面自动跳转
+            </div>
 
-    <script type="text/javascript">
-        delayURL("{{$rdurl or url('/')}}");
-    </script>
 
-@endsection
+            <script type="text/javascript">
+                delayURL("{{$rdurl or url('home')}}");
+            </script>
+
+        </div>
+    </div>
+
+</main>
+
+@include('layouts.footer')
+
+
 

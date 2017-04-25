@@ -13,7 +13,7 @@
             <div class="feed-detail">
                 <div class="authorinfo">
                     <div class="feed-avatar">
-                        <img src="{{url('img/avatar.jpg')}}" alt="" class="avatar-m">
+                        <img src="{{url('avatar').'/'.$u->id}}" alt="" class="avatar-m">
                     </div>
                     <div class="feed-msg">
                         <p>
@@ -51,7 +51,7 @@
                 <div class="feed-detail">
                     <div class="authorinfo">
                         <div class="feed-avatar">
-                            <img src="{{url('img/avatar.jpg')}}" alt="" class="avatar-m">
+                            <img src="{{url('avatar').'/'.$journal->id}}" alt="" class="avatar-m">
                         </div>
                         <div class="feed-msg">
                             <p>

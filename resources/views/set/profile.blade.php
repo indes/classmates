@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-md-6 col-md-push-2">
 
-            <form class="form-horizontal" action="{{ url('/account/set/profile') }}" method="post" role="form">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ url('/account/set/profile') }}" method="post" role="form">
                 <legend>个人资料修改</legend>
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label">头像</label>
                     <div class="col-lg-9">
-                        <input type="file">
+                        <input type="file" name="stuimg"/>
                     </div>
                 </div>
                 <div class="form-group">
