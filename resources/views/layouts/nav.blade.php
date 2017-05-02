@@ -40,7 +40,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{url('home')}}">我的主页</a></li>
                             <li><a href="#">我的动态</a></li>
-                            <li><a href="{{url('class')}}">班级</a></li>
+                            <li><a href="{{url('class')}}">我的班级</a></li>
                             <li class="divider"></li>
                             <li><a href="{{url('account\set\profile')}}">资料修改</a>
                             <li><a href="{{url('account\set\pwd')}}">修改密码</a></li>

@@ -23,6 +23,9 @@ class HomeController extends Controller
         $u=User::find($id);
         $j=Journal::where('jAuthorId',$id)->orderBy('jPublishDate', 'desc')->paginate(6);
         $j->count=Journal::where('jAuthorId',$id)->get()->count();
+
+        $u->jcount=Journal::where('jAuthorId',$u->id)->get()->count();
+        $u->classcount=User::where('stuClassId',$u->stuClassId)->get()->count();
         return view('home/home')->withUser($u)->withJournal($j);
         //
     }

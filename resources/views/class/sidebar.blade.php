@@ -4,7 +4,6 @@
     </div>
     <div class="row" style="text-align: center">
         <div class="col-md-4 col-xs-12">
-
             <a href="{{url('class')}}">
                 <p class="p-infonum">{{$class->Journals->count()}}</p>
                 动态

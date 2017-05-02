@@ -22,7 +22,11 @@ class IndexController extends Controller
             ->where('stuClassId',session('user')->stuClassId)
             ->orderBy('jPublishDate', 'desc')
             ->paginate(6);
-        return view('index.index')->withUser(session('user'))->withJournals($j);
+        $u=session('user');
+        $u->jcount=Journal::where('jAuthorId',$u->id)->get()->count();
+        $u->classcount=User::where('stuClassId',$u->stuClassId)->get()->count();
+//        dd($u);
+        return view('index.index')->withUser($u)->withJournals($j);
     }
 
 

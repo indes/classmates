@@ -6,15 +6,13 @@
             @include('class.sidebar')
         </div>
         <div class="col-md-8" role="main">
-
             <div class="row">
-
                     @foreach($class->Journals as $journal)
                         <div class="card-n">
                             <div class="feed-detail">
                                 <div class="authorinfo">
                                     <div class="feed-avatar">
-                                        <img src="{{url('img/avatar.jpg')}}" alt="" class="avatar-m">
+                                        <img src="{{url('/avatar').'/'.$journal->jAuthorId}}" alt="" class="avatar-m">
                                     </div>
                                     <div class="feed-msg">
                                         <p>
@@ -24,7 +22,6 @@
                                         </p>
                                     </div>
                                 </div>
-
                                 <div class="detail">
                                     {{$journal->jData}}
                                 </div>

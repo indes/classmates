@@ -14,7 +14,7 @@
                         <div class="feed-detail">
                             <div class="authorinfo">
                                 <div class="feed-avatar">
-                                    <img src="./img/avatar.jpg" alt="" class="avatar-m">
+                                    <img src="{{url('/avatar').'/'.$member->id}}" alt="" class="avatar-m">
                                 </div>
                                 <div class="feed-msg">
                                     <p>
