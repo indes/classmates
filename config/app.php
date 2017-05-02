@@ -143,6 +143,7 @@ return [
         Classmate\Providers\AuthServiceProvider::class,
         Classmate\Providers\EventServiceProvider::class,
         Classmate\Providers\RouteServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
