@@ -25,7 +25,9 @@
                     <td>{{$file->userid}}</td>
                     <td>{{$file->created_at}}</td>
                     <td>
-                        <i class="glyphicon glyphicon-cloud-download"></i>
+                        <a href="{{url('class/file').'/'.$file->fileid}}">
+                            <i class="glyphicon glyphicon-cloud-download"></i>
+                        </a>
                         &nbsp;
                         <i class="glyphicon glyphicon-remove-sign"></i>
                     </td>

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 use Classmate\Http\Requests;
 use Classmate\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Storage;
+
 
 
 class FileController extends Controller
@@ -94,6 +96,12 @@ class FileController extends Controller
     public function show($id)
     {
         //
+
+        $f=ClassFiles::where('fileid',$id)->first();
+        $path=storage_path().'\app\\'.$f->path;
+//        dd($path);
+        return response()->download($path,$f->name);
+//        dd(Storage::disk('local')->get($f->path));
     }
 
     /**
