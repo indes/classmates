@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Home'], function()
         Route::post('/home','HomeController@publish');
         Route::get('/exit','AuthController@logout');
 
+        Route::get('/del/{id}','HomeController@del');//动态删除路由
     });
 
     Route::group(['prefix' => 'auth'], function () {

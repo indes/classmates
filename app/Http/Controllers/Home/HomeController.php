@@ -46,4 +46,23 @@ class HomeController extends Controller
         return view('index.redirect')->withMsg("发布成功！")->withRdurl(url('/'));
     }
 
+    public function del($id)
+    {
+        $u=session('user');
+        $j=Journal::where('id',$id)->first();
+        if($j){
+            if($j->jAuthorId==$u->id){
+                if($j->delete()){
+                    return response()->json(['status'=>1]);
+                }else{
+                    return response()->json(['status'=>2]);
+                }
+            }else{
+                return response()->json(['status'=>2]);
+            }
+        }else{
+            return response()->json(['status'=>2]);
+        }
+    }
+
 }

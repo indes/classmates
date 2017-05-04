@@ -35,7 +35,6 @@
                         </a>
                         @else
                         <i class="glyphicon glyphicon-trash"></i>
-
                         @endif
                     </td>
                 </tr>

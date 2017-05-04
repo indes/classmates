@@ -89,9 +89,9 @@ class FileController extends Controller
             );
 
             if($d){
-                echo '上传成功';
+                return view('index.redirect')->withRdurl(url('class\file'))->withMsg("上传成功！");
             }else{
-                echo '上传失败';
+                return view('index.redirect')->withRdurl(url('class\file'))->withMsg("上传失败！");
             }
         }
 
@@ -148,12 +148,7 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
-
-
-
         $rearr=array("fileid"=>$id);
-
-
         $f=ClassFiles::where('fileid',$id)->first();
         if($f->userid!=session('user')->id){
             $rearr['status']=0;

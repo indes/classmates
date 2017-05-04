@@ -38,7 +38,7 @@ class AuthController extends Controller
     {
         if(session('user')){
             session(['user'=>null]);
-            return "退出成功";
+            return view('index.redirect')->withRdurl(url('auth/login'))->withMsg('退出成功！');
         }
     }
 

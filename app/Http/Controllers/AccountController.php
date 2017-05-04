@@ -49,7 +49,9 @@ class AccountController extends Controller
             //
             $i=Input::get();
             $u=User::find(session('user')->id);
-            $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
+            if($request->file('stuimg')){
+                $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
+            }
 //            dd($request->file('stuimg')->getRealPath());
 //            dd($request->file('stuimg'));
             $u->userName=$i['name'];
