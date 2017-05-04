@@ -5,7 +5,7 @@ namespace Classmate\Http\Controllers;
 
 use Classmate\Http\Model\ClassFiles;
 use Classmate\Http\Model\cmClass;
-
+use DB;
 use Illuminate\Http\Request;
 
 use Classmate\Http\Requests;
@@ -25,11 +25,21 @@ class FileController extends Controller
     public function index()
     {
         //
-        $f=ClassFiles::where('classid',session('user')->stuClassId)
+        $f=collect(
+            DB::table('cm_files')
+            ->leftJoin('cm_user', 'cm_files.userid', '=', 'cm_user.id')
+            ->where('classid',session('user')->stuClassId)
             ->where('status','1')
             ->orderBy('created_at','desc')
-            ->get();
-        return view('class.files')->withFiles($f);
+            ->get()
+        );
+
+
+//        $f=ClassFiles::where('classid',session('user')->stuClassId)
+//            ->where('status','1')
+//            ->orderBy('created_at','desc')
+//            ->get();
+        return view('class.files')->withFiles($f)->withUser(session('user'));
 
 
     }
@@ -139,19 +149,30 @@ class FileController extends Controller
     public function destroy($id)
     {
 
-        $rearr=array("fileid"=>$id);
-        $f=ClassFiles::where('fileid',$id)->first();
-        $r=Storage::disk('local')->delete($f->path);
 
-        if($r){
-            $f->status=2;
-            $f->save();
-            $rearr['status']=1;
-        }else{
+
+        $rearr=array("fileid"=>$id);
+
+
+        $f=ClassFiles::where('fileid',$id)->first();
+        if($f->userid!=session('user')->id){
             $rearr['status']=0;
-            $rearr['errmsg']='';
+            $rearr['errmsg']='没有权限';
+            return response()->json($rearr);
+        }else{
+            $r=Storage::disk('local')->delete($f->path);
+
+            if($r){
+                $f->status=2;
+                $f->save();
+                $rearr['status']=1;
+            }else{
+                $rearr['status']=0;
+                $rearr['errmsg']='';
+            }
+            return response()->json($rearr);
         }
-        return response()->json($rearr);
+
         //
     }
 

@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <h4>文件列表</h4>
-
+        <strong style="font-size: 29px">文件列表</strong>
+        <a href="{{url('class/file/create')}}" class="btn btn-primary btn-sm" style="margin-left: 80%"><i class="glyphicon glyphicon-cloud-upload"></i>上传文件</a>
         @if($files->count())
             <table class="table table-hover">
                 <thead>
@@ -22,16 +22,21 @@
                     <td>{{$file->name}}</td>
                     <td>{{number_format($file->size/1024,2)}} KB</td>
 
-                    <td>{{$file->userid}}</td>
+                    <td>{{$file->stuName}}{{$file->userName?'('.$file->userName.')':''}}</td>
                     <td>{{$file->created_at}}</td>
                     <td>
-                        <a href="{{url('class/file').'/'.$file->fileid}}">
+                        <a href="{{url('class/file').'/'.$file->fileid}}" title="下载">
                             <i class="glyphicon glyphicon-cloud-download"></i>
                         </a>
                         &nbsp;
-                        <a href="javascript:void(0);" onclick="delfile({{$file->fileid}})">
-                            <i class="glyphicon glyphicon-remove-sign"></i>
+                        @if($user->id==$file->userid)
+                        <a href="javascript:void(0);" onclick="delfile({{$file->fileid}})" title="删除">
+                            <i class="glyphicon glyphicon-trash"></i>
                         </a>
+                        @else
+                        <i class="glyphicon glyphicon-trash"></i>
+
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -52,7 +57,7 @@
                 var obj=$.ajax({
                     url:'{{url('class/file')}}/'+fileid,
                     type:'DELETE',
-                    async:true,    //或false,是否异步
+                    async:true,
                     data:{
                         _token:"{{csrf_token()}}",
                     },
@@ -66,7 +71,6 @@
                     }
                 });
             }
-
         }
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace Classmate\Http\Controllers;
 
+use Classmate\Http\Model\ClassFiles;
 use Classmate\Http\Model\cmClass;
 use Classmate\http\Model\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class cmClassController extends Controller
             ->orderBy('jPublishDate', 'desc')
             ->get());
         $this->c->Journals=$j;
+
+        $f=ClassFiles::where('classid',session('user')->stuClassId)
+            ->where('status','1')
+            ->orderBy('created_at','desc')
+            ->get()->count();
+        $this->c->filenum=$f;
     }
 
     /**

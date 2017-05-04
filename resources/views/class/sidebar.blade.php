@@ -17,8 +17,8 @@
             </a>
         </div>
         <div class="col-md-4 col-xs-12">
-            <a href="#">
-                <p class="p-infonum">100</p>
+            <a href="{{url('class/file')}}">
+                <p class="p-infonum">{{$class->filenum}}</p>
                 文件
             </a>
         </div>
