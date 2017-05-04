@@ -9,6 +9,8 @@ Route::group(['middleware'=>'uauth'],function (){
 //    Route::get('/class/file','cmClassController@files');
 
     Route::resource('avatar','AvatarController');
+//    Route::resource('/class/file/del/{id?}','FileController@del');
+
     Route::resource('/class/file','FileController');
 
 

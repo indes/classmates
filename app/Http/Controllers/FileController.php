@@ -25,7 +25,10 @@ class FileController extends Controller
     public function index()
     {
         //
-        $f=ClassFiles::where('classid',session('user')->stuClassId)->get();
+        $f=ClassFiles::where('classid',session('user')->stuClassId)
+            ->where('status','1')
+            ->orderBy('created_at','desc')
+            ->get();
         return view('class.files')->withFiles($f);
 
 
@@ -135,6 +138,26 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
+
+        $rearr=array("fileid"=>$id);
+        $f=ClassFiles::where('fileid',$id)->first();
+        $r=Storage::disk('local')->delete($f->path);
+
+        if($r){
+            $f->status=2;
+            $f->save();
+            $rearr['status']=1;
+        }else{
+            $rearr['status']=0;
+            $rearr['errmsg']='';
+        }
+        return response()->json($rearr);
         //
+    }
+
+    public function del($id=null)
+    {
+
+
     }
 }

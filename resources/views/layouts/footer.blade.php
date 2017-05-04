@@ -11,6 +11,5 @@
             $('.dropdown-toggle').dropdown()
         });
     });
-
 </script>
 </html>

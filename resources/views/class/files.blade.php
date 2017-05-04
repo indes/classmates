@@ -18,7 +18,7 @@
                 <tbody>
                 @foreach($files as $file)
 
-                <tr>
+                <tr id="{{$file->fileid}}">
                     <td>{{$file->name}}</td>
                     <td>{{number_format($file->size/1024,2)}} KB</td>
 
@@ -29,7 +29,9 @@
                             <i class="glyphicon glyphicon-cloud-download"></i>
                         </a>
                         &nbsp;
-                        <i class="glyphicon glyphicon-remove-sign"></i>
+                        <a href="javascript:void(0);" onclick="delfile({{$file->fileid}})">
+                            <i class="glyphicon glyphicon-remove-sign"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -41,5 +43,31 @@
         @endif
 
     </div>
+    <script>
+        function delfile(fileid)
+        {
+            var r=confirm("确认删除该文件？");
+            if (r==true){
+                //使用ajax方式删除文件
+                var obj=$.ajax({
+                    url:'{{url('class/file')}}/'+fileid,
+                    type:'DELETE',
+                    async:true,    //或false,是否异步
+                    data:{
+                        _token:"{{csrf_token()}}",
+                    },
+                    success:function(result){
+                        if(result.status==1){
+                            alert("删除成功！");
+                            $("tr#"+result.fileid).remove();
+                        }else{
+                            alert("删除失败！错误信息："+result.errmsg);
+                        }
+                    }
+                });
+            }
+
+        }
+    </script>
 @endsection
 
