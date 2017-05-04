@@ -6,7 +6,11 @@ Route::group(['middleware'=>'uauth'],function (){
     Route::get('/','IndexController@index')->name('index');
     Route::get('/search','IndexController@search');
     Route::get('/rdct','IndexController@rd');
+//    Route::get('/class/file','cmClassController@files');
+
     Route::resource('avatar','AvatarController');
+    Route::resource('/class/file','FileController');
+
 
 });
 

@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="col-md-4 col-xs-12">
-                <a href="{{url('class')}}">
+                <a href="{{url('class/members')}}">
                     <p class="p-infonum">{{$user->classcount}}</p>
                     同学
                 </a>

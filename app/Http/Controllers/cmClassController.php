@@ -36,6 +36,12 @@ class cmClassController extends Controller
         return view('class.index')->withClass($this->c);
     }
 
+
+    public function files()
+    {
+        return view('class.files');
+
+    }
     public function mbr()
     {
         return view('class.member')->withClass($this->c);

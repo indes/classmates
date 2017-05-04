@@ -48,12 +48,10 @@ class AccountController extends Controller
         if ($request->isMethod('post')) {
             //
             $i=Input::get();
-
-
-
             $u=User::find(session('user')->id);
             $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
-
+//            dd($request->file('stuimg')->getRealPath());
+//            dd($request->file('stuimg'));
             $u->userName=$i['name'];
             $u->stuBio=$i['bio'];
             $u->stuName=$i['rname'];

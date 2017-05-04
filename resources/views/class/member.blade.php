@@ -28,15 +28,11 @@
                                         <br>
                                         <small>
                                         </small>
-
                                     </p>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
-
                 @endforeach
             </div>
 
