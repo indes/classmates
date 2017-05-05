@@ -30,10 +30,10 @@ Route::group(['namespace' => 'Home'], function()
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login','AuthController@login');
         Route::get('/login',function (){
-            return view('home.login');
+            return view('home.login')->withInfo(['title'=>'登录']);
         });
         Route::get('/signup',function (){
-            return view('home.signup');
+            return view('home.signup')->withInfo(['title'=>'注册']);
         });
         Route::post('/signup','AuthController@signup');
         Route::get('/',function (){
@@ -49,7 +49,7 @@ Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
 
     Route::group(['prefix' => 'set'], function () {
         Route::get('pwd',function (){
-            return view('set.pwd');
+            return view('set.pwd')->withInfo(['title'=>'密码修改','active'=>'set']);
         });
 
         Route::post('pwd','AccountController@pwdset');

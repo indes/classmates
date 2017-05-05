@@ -33,8 +33,7 @@
                         <a href="javascript:void(0);" onclick="delfile({{$file->fileid}})" title="删除">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>
-                        @else
-                        <i class="glyphicon glyphicon-trash"></i>
+                        
                         @endif
                     </td>
                 </tr>

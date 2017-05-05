@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+    private $viewinfo=array('active'=>'file');
+
     /**
      * Display a listing of the resource.
      *
@@ -33,13 +35,13 @@ class FileController extends Controller
             ->orderBy('created_at','desc')
             ->get()
         );
-
+        $this->viewinfo['title']='文件共享';
 
 //        $f=ClassFiles::where('classid',session('user')->stuClassId)
 //            ->where('status','1')
 //            ->orderBy('created_at','desc')
 //            ->get();
-        return view('class.files')->withFiles($f)->withUser(session('user'));
+        return view('class.files')->withFiles($f)->withUser(session('user'))->withInfo($this->viewinfo);
 
 
     }
@@ -52,7 +54,9 @@ class FileController extends Controller
     public function create()
     {
         //
-        return view('class.upload');
+        $this->viewinfo['title']='文件上传';
+
+        return view('class.upload')->withInfo($this->viewinfo);
 
     }
 
@@ -169,11 +173,5 @@ class FileController extends Controller
         }
 
         //
-    }
-
-    public function del($id=null)
-    {
-
-
     }
 }

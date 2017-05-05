@@ -24,7 +24,8 @@
 
                 <h4>{{$msg}}</h4>
                 <span id="time" style="color: red;">5</span>
-                秒钟之后页面自动跳转
+                秒钟之后页面自动
+                <a href="{{$rdurl or url('home')}}">跳转</a>
             </div>
 
 

@@ -13,6 +13,7 @@ use Classmate\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
+    private $viewinfo=array('active'=>'index');
 
     public function index()
     {
@@ -26,7 +27,8 @@ class IndexController extends Controller
         $u->jcount=Journal::where('jAuthorId',$u->id)->get()->count();
         $u->classcount=User::where('stuClassId',$u->stuClassId)->get()->count();
 //        dd($u);
-        return view('index.index')->withUser($u)->withJournals($j);
+        $this->viewinfo['title']='首页';
+        return view('index.index')->withUser($u)->withJournals($j)->withInfo($this->viewinfo);
     }
 
 
@@ -49,7 +51,9 @@ class IndexController extends Controller
                 ->where('jData','like',$q)
                 ->orderBy('jPublishDate', 'desc')
                 ->get());
-            return view('index.search')->withRes($res);
+            $this->viewinfo['title']='\''.$res['key'].'\'的搜索结果';
+
+            return view('index.search')->withRes($res)->withInfo($this->viewinfo);
         }else{
             return view('index.redirect')->withMsg("请输入关键词！")->withRdurl(url('/'));
         }

@@ -40,7 +40,7 @@
             </div>
         @endforeach
     @else
-        一共0条动态
+        没有动态
     @endif
 
         <div>

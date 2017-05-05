@@ -13,8 +13,8 @@ use DB;
 
 class cmClassController extends Controller
 {
-    public $c;
-
+    private $c;
+    private $viewinfo=array('active'=>'class');
     function __construct(){
         $this->c=cmClass::find(session('user')->stuClassId);
         $this->c->members=User::where('stuClassId',session('user')->stuClassId)->get();
@@ -39,19 +39,22 @@ class cmClassController extends Controller
      */
     public function index()
     {
-
-        return view('class.index')->withClass($this->c);
+        $this->viewinfo['title']='班级';
+        return view('class.index')->withClass($this->c)->withInfo($this->viewinfo);
     }
 
 
     public function files()
     {
-        return view('class.files');
+        $this->viewinfo['active']='file';
+        $this->viewinfo['title']='文件';
+        return view('class.files')->withInfo($this->viewinfo);
 
     }
     public function mbr()
     {
-        return view('class.member')->withClass($this->c);
+        $this->viewinfo['title']='班级成员';
+        return view('class.member')->withClass($this->c)->withInfo($this->viewinfo);
     }
 
 }

@@ -1,6 +1,7 @@
 <div class="container">
     <nav class="navbar navbar-default site-nav navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,10 +27,32 @@
                             </div>
                         </div>
                     </form>
-                    <li class="active"><a href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span>
-                            通知
-                            <span class="navbar-new">2</span>
+                    <li class="
+                    @if($info['active']=='index')
+                            active
+                    @endif
+                    "><a href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span> 首页<span class="sr-only">(current)</span></a></li>
+                    {{--<li><a href="#"><span class="glyphicon glyphicon-inbox"></span>--}}
+                            {{--通知--}}
+                            {{--<span class="navbar-new">2</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    <li class="
+                    @if($info['active']=='class')
+                            active
+                    @endif
+                    "><a href="{{url('class')}}">
+                            <span class="glyphicon glyphicon-tree-deciduous"></span>
+                            班级
+                        </a>
+                    </li>
+                    <li class="
+                    @if($info['active']=='file')
+                            active
+                    @endif
+                    "><a href="{{url('class/file')}}">
+                            <span class="glyphicon glyphicon-hdd"></span>
+                            文件
                         </a>
                     </li>
 

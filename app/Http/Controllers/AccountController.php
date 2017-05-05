@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
 {
+    private $viewinfo=array('active'=>'set');
 
     public function index()
     {
@@ -67,10 +68,10 @@ class AccountController extends Controller
 
         };
         if ($request->isMethod('get')) {
-
+            $this->viewinfo['title']='资料修改';
             $u=User::find(session('user')->id);
             $c=cmClass::find($u->stuClassId);
-            return view('set.profile')->withUser($u)->withClass($c);
+            return view('set.profile')->withUser($u)->withClass($c)->withInfo($this->viewinfo);
         };
     }
 }

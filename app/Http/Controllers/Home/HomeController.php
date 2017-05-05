@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
+    private $viewinfo=array('active'=>'home');
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +21,7 @@ class HomeController extends Controller
      */
     public function index($id=null)
     {
+
         if(!isset($id)) $id=session('user')->id;
         $u=User::find($id);
         $j=Journal::where('jAuthorId',$id)->orderBy('jPublishDate', 'desc')->paginate(6);
@@ -26,13 +29,16 @@ class HomeController extends Controller
 
         $u->jcount=Journal::where('jAuthorId',$u->id)->get()->count();
         $u->classcount=User::where('stuClassId',$u->stuClassId)->get()->count();
-        return view('home/home')->withUser($u)->withJournal($j);
+        $this->viewinfo['title']=$u->userName.'的主页';
+
+        return view('home/home')->withUser($u)->withJournal($j)->withInfo($this->viewinfo);
         //
     }
 
     public function login()
     {
-        return view('home/login');
+        $this->viewinfo['title']='登录';
+        return view('home/login')->withInfo($this->viewinfo);
     }
 
     public function publish()
