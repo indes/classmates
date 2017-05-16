@@ -113,7 +113,7 @@ class FileController extends Controller
     public function show($id)
     {
         //
-
+        //文件下载
         $f=ClassFiles::where('fileid',$id)->first();
         $path=storage_path().'\app\\'.$f->path;
 //        dd($path);
@@ -154,13 +154,12 @@ class FileController extends Controller
     {
         $rearr=array("fileid"=>$id);
         $f=ClassFiles::where('fileid',$id)->first();
-        if($f->userid!=session('user')->id){
+        if($f->userid!=session('user')->id&&session('user')->isadmin!=1){
             $rearr['status']=0;
             $rearr['errmsg']='没有权限';
             return response()->json($rearr);
         }else{
             $r=Storage::disk('local')->delete($f->path);
-
             if($r){
                 $f->status=2;
                 $f->save();

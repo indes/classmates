@@ -56,16 +56,29 @@
                         </a>
                     </li>
 
+                    <li class="dropdown active" >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            系统管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('admin\user')}}">用户管理</a></li>
+                            <li><a href="{{url('admin\journal')}}">动态管理</a></li>
+                            <li><a href="{{url('admin\class')}}">班级管理</a></li>
+                            <li><a href="{{url('admin\file')}}">文件管理</a></li>
+
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user"></span> {{ session('user')->username }}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('home')}}">我的主页</a></li>
-                            <li><a href="#">我的动态</a></li>
+                            <li><a href="{{url('home')}}">我的动态</a></li>
                             <li><a href="{{url('class')}}">我的班级</a></li>
                             <li><a href="{{url('class\file')}}">文件分享</a></li>
-
                             <li class="divider"></li>
                             <li><a href="{{url('account\set\profile')}}">资料修改</a>
                             <li><a href="{{url('account\set\pwd')}}">修改密码</a></li>

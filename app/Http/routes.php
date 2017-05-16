@@ -1,17 +1,21 @@
 <?php
 
 
-
 Route::group(['middleware'=>'uauth'],function (){
     Route::get('/','IndexController@index')->name('index');
     Route::get('/search','IndexController@search');
     Route::get('/rdct','IndexController@rd');
 //    Route::get('/class/file','cmClassController@files');
-
     Route::resource('avatar','AvatarController');
 //    Route::resource('/class/file/del/{id?}','FileController@del');
-
     Route::resource('/class/file','FileController');
+
+    //后台控制器
+    Route::get('/admin','AdminController@index');
+    Route::get('/admin/file','AdminController@file');
+    Route::get('/admin/user','AdminController@user');
+    Route::get('/admin/class','AdminController@class');
+    Route::get('/admin/journal','AdminController@journal');
 
 
 });
@@ -46,7 +50,6 @@ Route::group(['namespace' => 'Home'], function()
 
 //account路由
 Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
-
     Route::group(['prefix' => 'set'], function () {
         Route::get('pwd',function (){
             return view('set.pwd')->withInfo(['title'=>'密码修改','active'=>'set']);
@@ -60,10 +63,7 @@ Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
 Route::group(['prefix' => 'class','middleware'=>'uauth'], function () {
     Route::get('/','cmClassController@index');
     Route::get('/members','cmClassController@mbr');
-
 });
-
-
 
 Route::get('/set',function (){
     session(['admin'=>123]);

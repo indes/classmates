@@ -17,7 +17,6 @@ class UserAuth
     {
 //        dd(session('user'));
         if(!session('user')){
-
             return redirect('auth/login');
         }
         return $next($request);
