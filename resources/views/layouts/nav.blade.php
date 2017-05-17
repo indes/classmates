@@ -59,7 +59,11 @@
 
                     {{--后台链接--}}
                     @if(session('user')->isadmin==1)
-                        <li class="dropdown active" >
+                        <li class="dropdown
+                        @if($info['active']=='admin')
+                            active
+                        @endif
+                        " >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-cog"></span>
                                 系统管理
