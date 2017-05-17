@@ -13,7 +13,7 @@ Route::group(['middleware'=>'uauth'],function (){
     Route::get('/admin','AdminController@index');
     Route::get('/admin/file','AdminController@file');
     Route::get('/admin/user/{id?}','AdminController@user');
-    Route::get('/admin/class','AdminController@class');
+    Route::any('/admin/class/{id?}','AdminController@classadmin');
     Route::get('/admin/journal','AdminController@journal');
 
     Route::any('/admin/pwd/{id}','AdminController@pwd');

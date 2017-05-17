@@ -95,6 +95,44 @@ class AdminController extends Controller
         };
     }
 
+
+    public function classadmin(Request $request,$id=null)
+    {
+
+        if ($request->isMethod('post')) {
+            $i=Input::get();
+            if(isset($i['classname'])&&isset($i['major'])){            //数据验证
+                $c=cmClass::where('classid','=',$id)->first();
+                $c->classname=$i['classname'];
+                $c->major=$i['major'];
+                $c->save();
+                return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("修改成功！");
+
+            }else{
+                return redirect()->back()->withErrors('所有信息都要填写！');
+            }
+
+        };
+
+        if ($request->isMethod('get')) {
+            if ($id!=null){
+                //展示班级详情
+                $this->viewinfo['title']='班级修改';
+
+                $c=cmClass::where('classid','=',$id)->get();
+//                dd($c);
+                return view('admin.classset')->withClass($c)->withInfo($this->viewinfo);
+
+            }else{
+                //展示班级列表
+                $c=DB::select('select a.*,count(b.id) as count from cm_class a,cm_user b where a.classid = b.stuClassid group by a.classid;');
+                $this->viewinfo['title']='班级管理';
+                return view('admin.class')->withClasses($c)->withInfo($this->viewinfo);
+            }
+        };
+
+    }
+
     public function file()
     {
         $this->viewinfo['title']='文件管理';
