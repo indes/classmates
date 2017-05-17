@@ -38,7 +38,10 @@
                 <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">真实姓名:</span>
                 <span class="col-md-4 col-xs-8">{{$user->stuName}}</span>
             @endif
-
+            @if($user->stuNum)
+                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">学号:</span>
+                <span class="col-md-4 col-xs-8">{{$user->stuNum}}</span>
+            @endif
             <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">性别:</span>
             <span class="col-md-4 col-xs-8">
                 @if($user->stuSex=='male')
