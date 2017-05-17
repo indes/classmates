@@ -3,22 +3,96 @@
 namespace Classmate\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Classmate\Http\Model\cmClass;
+use Classmate\http\Model\User;
 
 use Classmate\Http\Requests;
 use Classmate\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Input;
+
 
 class AdminController extends Controller
 {
-    private $viewinfo=array('active'=>'set');
+    private $viewinfo=array('active'=>'admin');
+
+    function __construct()
+    {
+        if(session('user')->isadmin!=1){
+//            echo "没有权限";
+//            return view('index.redirect')->withRdurl(url('\\'))->withMsg('当前账户没有管理权限！');
+        }
+    }
 
     public function index()
     {
         //
         $this->viewinfo['title']='后台管理';
-
         return view('admin.admin')->withInfo($this->viewinfo);
+    }
+
+
+    public function user($id=null){
+        $this->viewinfo['title']='用户管理';
+        $u=collect(
+            DB::table('cm_user')
+                ->leftJoin('cm_class','cm_user.stuClassId','=','cm_class.classid')
+                ->get()
+        );
+        return view('admin.user')->withInfo($this->viewinfo)->withUsers($u);
+    }
+
+
+    public function pwd(Request $request,$id)
+    {
+        if ($request->isMethod('post')) {
+            $i=Input::get();
+            if($i['newpassword']==$i['rnewpassword']){
+                $u=User::find($id);
+                $u->password=md5($i['newpassword']);
+                $u->save();
+                return view('index.redirect')->withRdurl(url('admin\user'))->withMsg('修改成功！');
+
+            }else{
+                return redirect()->back()->withErrors('两次输入密码不相同！');
+            }
+        };
+
+        if ($request->isMethod('get')) {
+            $this->viewinfo['title']='密码修改';
+            return view('admin.pwd')->withInfo($this->viewinfo)->withId($id);
+        };
+    }
+
+    public function profile(Request $request,$id)
+    {
+        if ($request->isMethod('post')) {
+            $i=Input::get();
+            $u=User::find($id);
+            if($request->file('stuimg')){
+                $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
+            }
+
+            $u->isadmin=$i['role'];
+            $u->userName=$i['name'];
+            $u->stuBio=$i['bio'];
+            $u->stuName=$i['rname'];
+            $u->stuSex=$i['sex'];
+            $u->stuQQ=$i['QQ'];
+            $u->stuPhone=$i['phone'];
+            $u->stuNum=$i['stunum'];
+            $u->email=$i['email'];
+            $u->save();
+            return view('index.redirect')->withRdurl(url('admin/user'))->withMsg("修改成功！");
+        };
+
+        if ($request->isMethod('get')) {
+            $this->viewinfo['title']='资料修改';
+            $u=User::find($id);
+            $c=cmClass::find($u->stuClassId);
+            return view('admin.profile')->withUser($u)->withClass($c)->withInfo($this->viewinfo);
+        };
     }
 
     public function file()

@@ -2,33 +2,37 @@
 @extends('layouts.full')
 
 @section('content')
-    <h3>后台管理</h3>
-    <ul id="myTabs" class="nav nav-tabs" role="tablist">
-        <li role="presentation" class=""><a href="#user" id="user-tab" role="tab" data-toggle="tab" aria-controls="user" aria-expanded="true">用户管理</a></li>
-        <li role="presentation" class="active"><a href="#journal" role="tab" id="journal-tab" data-toggle="tab" aria-controls="journal" aria-expanded="false">动态管理</a></li>
-        <li role="presentation" class=""><a href="#class" role="tab" id="class-tab" data-toggle="tab" aria-controls="class" aria-expanded="false">班级管理</a></li>
-        <li role="presentation" class=""><a href="#file" role="tab" id="file-tab" data-toggle="tab" aria-controls="file" aria-expanded="false">文件管理</a></li>
-    </ul>
+    <div class="row">
+        <strong style="font-size: 29px">用户管理</strong>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>用户id</th>
+                    <th>昵称</th>
+                    <th>真实姓名</th>
+                    <th>所属班级</th>
+                    <th>用户级别</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $r)
+                    <tr id="{{$r->id}}">
+                        <td>{{$r->id}}</td>
+                        <td>{{$r->userName}}</td>
+                        <td>{{$r->stuName}}</td>
+                        <td>{{$r->className}}</td>
+                        <td>{{$r->isadmin?'管理员':'普通用户'}}</td>
+                        <td>
+                            <a href="{{url('admin/profile').'/'.$r->id}}">修改资料</a>
+                            <a href="{{url('admin/pwd').'/'.$r->id}}">修改密码</a>
+                        </td>
 
-    <div id="myTabContent" class="tab-content">
-        <div role="tabpanel" class="tab-pane fade active in" id="user" aria-labelledby="user-tab">
-            user
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="journal" aria-labelledby="journal-tab">
-2
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="class" aria-labelledby="class-tab">
-3
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="file" aria-labelledby="file-tab">
-4
-        </div>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
     </div>
-    <script>
-        $('#myTabs a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    </script>
 @endsection
 
