@@ -39,7 +39,12 @@
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">班级</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="class">
+
+                        <select class="form-control" name="classid">
+                            @foreach($sc as $r)
+                            <option value="{{$r->classid}}">{{$r->className}}</option>
+                            @endforeach
+                        </select>
 
                     </div>
 

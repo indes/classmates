@@ -41,10 +41,8 @@ Route::group(['namespace' => 'Home'], function()
         Route::get('/login',function (){
             return view('home.login')->withInfo(['title'=>'登录']);
         });
-        Route::get('/signup',function (){
-            return view('home.signup')->withInfo(['title'=>'注册']);
-        });
-        Route::post('/signup','AuthController@signup');
+
+        Route::any('/signup','AuthController@signup');
         Route::get('/',function (){
             abort(404);
         });

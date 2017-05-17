@@ -42,38 +42,52 @@ class AuthController extends Controller
         }
     }
 
-    public function signup()
+    public function signup(Request $request)
     {
-        $i=Input::get();
-        if($i['email']&&$i['name']&&$i['Password']&&$i['confirmPassword']&&$i['class']){
-            if($i['Password']==$i['confirmPassword']){
-                //判断邮箱是否存在
-                if(!(User::where('email','=',$i['email'])->first())){
-                    $u=new User;
-                    //判断班级是否存在
-                    if(($c=cmClass::where('className','=',$i['class'])->first())){
-                        $u->stuClassId=$c->classid;
-                    }else{
-                        $c=new cmClass;
-                        $c->className=$i['class'];
-                        $c->save();
-                        $u->stuClassId=$c->classid;
-                    }
 
-                    $u->stuName=$i['name'];
-                    $u->stuSex=$i['sex'];
-                    $u->email=$i['email'];
-                    $u->password=md5($i['Password']);
-                    $u->save();
-                    return view('index.redirect')->withRdurl(url('auth/login'))->withMsg('注册成功！');
+        if ($request->isMethod('post')) {
+//            注册用户
+            $i=Input::get();
+            if($i['email']&&$i['name']&&$i['Password']&&$i['confirmPassword']&&$i['classid']){
+                if($i['Password']==$i['confirmPassword']){
+                    //判断邮箱是否存在
+                    if(!(User::where('email','=',$i['email'])->first())){
+                        $u=new User;
+
+                        //判断班级是否存在
+//                        if(($c=cmClass::where('className','=',$i['class'])->first())){
+//                            $u->stuClassId=$c->classid;
+//                        }else{
+//                            $c=new cmClass;
+//                            $c->className=$i['class'];
+//                            $c->save();
+//                            $u->stuClassId=$c->classid;
+//                        }
+
+                        $u->stuClassId=$i['classid'];
+                        $u->stuName=$i['name'];
+                        $u->stuSex=$i['sex'];
+                        $u->email=$i['email'];
+                        $u->password=md5($i['Password']);
+                        $u->save();
+                        return view('index.redirect')->withRdurl(url('auth/login'))->withMsg('注册成功！');
+                    }else{
+                        return redirect()->back()->withInput()->withErrors('该邮箱已经注册！');
+                    }
                 }else{
-                    return redirect()->back()->withInput()->withErrors('该邮箱已经注册！');
+                    return redirect()->back()->withInput()->withErrors('两次输入的密码不一致！');
                 }
             }else{
-                return redirect()->back()->withInput()->withErrors('两次输入的密码不一致！');
+                return redirect()->back()->withInput()->withErrors('所有的信息都要填写！');
             }
-        }else{
-            return redirect()->back()->withInput()->withErrors('所有的信息都要填写！');
-        }
+        };
+
+        if ($request->isMethod('get')) {
+            //显示注册页面
+            return view('home.signup')->withInfo(['title'=>'注册'])->withSc(cmClass::all());
+        };
+
+
+
     }
 }
