@@ -56,19 +56,23 @@
                         </a>
                     </li>
 
-                    <li class="dropdown active" >
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-cog"></span>
-                            系统管理
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{url('admin\user')}}">用户管理</a></li>
-                            <li><a href="{{url('admin\journal')}}">动态管理</a></li>
-                            <li><a href="{{url('admin\class')}}">班级管理</a></li>
-                            <li><a href="{{url('admin\file')}}">文件管理</a></li>
 
-                        </ul>
-                    </li>
+                    {{--后台链接--}}
+                    @if(session('user')->isadmin==1)
+                        <li class="dropdown active" >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog"></span>
+                                系统管理
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url('admin\user')}}">用户管理</a></li>
+                                <li><a href="{{url('admin\journal')}}">动态管理</a></li>
+                                <li><a href="{{url('admin\class')}}">班级管理</a></li>
+                                <li><a href="{{url('admin\file')}}">文件管理</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

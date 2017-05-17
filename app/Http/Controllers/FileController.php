@@ -154,6 +154,7 @@ class FileController extends Controller
     {
         $rearr=array("fileid"=>$id);
         $f=ClassFiles::where('fileid',$id)->first();
+        //权限验证
         if($f->userid!=session('user')->id&&session('user')->isadmin!=1){
             $rearr['status']=0;
             $rearr['errmsg']='没有权限';
@@ -171,6 +172,5 @@ class FileController extends Controller
             return response()->json($rearr);
         }
 
-        //
     }
 }
