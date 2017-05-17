@@ -95,7 +95,34 @@ class AdminController extends Controller
         };
     }
 
+    public function classadd(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $i=Input::get();
+            if(isset($i['classname'])&&isset($i['major'])){            //数据验证
+                $c=new cmClass();
+                $c->classname=$i['classname'];
+                $c->major=$i['major'];
+                $c->save();
+                return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("添加成功！");
+            }else{
+                return redirect()->back()->withInput()->withErrors('所有信息都要填写！');
+            }
 
+        };
+
+        if ($request->isMethod('get')) {
+            $this->viewinfo['title']='添加班级';
+            return view('admin.classadd')->withInfo($this->viewinfo);
+        };
+    }
+
+    public function classdel($id){
+
+        $c=cmClass::where('classid','=',$id);
+        $c->delete();
+        return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("删除成功！");
+    }
     public function classadmin(Request $request,$id=null)
     {
 
@@ -107,7 +134,6 @@ class AdminController extends Controller
                 $c->major=$i['major'];
                 $c->save();
                 return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("修改成功！");
-
             }else{
                 return redirect()->back()->withErrors('所有信息都要填写！');
             }
@@ -125,7 +151,7 @@ class AdminController extends Controller
 
             }else{
                 //展示班级列表
-                $c=DB::select('select a.*,count(b.id) as count from cm_class a,cm_user b where a.classid = b.stuClassid group by a.classid;');
+                $c=DB::select('select a.*,count(b.id) as count from cm_class a  LEFT JOIN cm_user b on a.classid = b.stuClassid group by a.classid;');
                 $this->viewinfo['title']='班级管理';
                 return view('admin.class')->withClasses($c)->withInfo($this->viewinfo);
             }

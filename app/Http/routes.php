@@ -14,6 +14,10 @@ Route::group(['middleware'=>'uauth'],function (){
     Route::get('/admin/file','AdminController@file');
     Route::get('/admin/user/{id?}','AdminController@user');
     Route::any('/admin/class/{id?}','AdminController@classadmin');
+    Route::get('/admin/user/{id?}','AdminController@user');
+    Route::any('/admin/classadd','AdminController@classadd');
+    Route::get('/admin/classdel/{id}','AdminController@classdel');
+
     Route::get('/admin/journal','AdminController@journal');
 
     Route::any('/admin/pwd/{id}','AdminController@pwd');

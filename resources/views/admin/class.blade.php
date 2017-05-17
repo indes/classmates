@@ -4,10 +4,10 @@
 @section('content')
     <div class="row">
         <strong style="font-size: 29px">班级管理</strong>
+        <a href="{{url('admin/classadd')}}" class="btn btn-primary btn-sm" style="margin-left: 80%"><i class="glyphicon glyphicon-plus"></i>增加班级</a>
         <table class="table table-hover">
             <thead>
                 <tr>
-
                     <th>班级名</th>
                     <th>专业</th>
                     <th>成员数量</th>
@@ -44,7 +44,10 @@
             alert("班级中成员数不为0，无法删除！");
         }
         function classdel(id) {
-            alert(id);
+            var r=confirm("确认删除该班级？");
+            if (r==true){
+                window.location.href="{{url('admin/classdel')}}/"+id;
+            }
         }
     </script>
 @endsection
