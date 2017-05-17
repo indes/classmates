@@ -51,6 +51,7 @@ class AccountController extends Controller
             }
 //            dd($request->file('stuimg')->getRealPath());
 //            dd($request->file('stuimg'));
+            $u->stuClassId=$i['classid'];
             $u->userName=$i['name'];
             $u->stuBio=$i['bio'];
             $u->stuName=$i['rname'];
@@ -67,7 +68,8 @@ class AccountController extends Controller
             $this->viewinfo['title']='资料修改';
             $u=User::find(session('user')->id);
             $c=cmClass::find($u->stuClassId);
-            return view('set.profile')->withUser($u)->withClass($c)->withInfo($this->viewinfo);
+            $sc=cmClass::all();
+            return view('set.profile')->withUser($u)->withClass($c)->withSc($sc)->withInfo($this->viewinfo);
         };
     }
 }
