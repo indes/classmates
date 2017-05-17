@@ -56,7 +56,15 @@
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">班级</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="class" value="{{$class->className}}">
+                        <select class="form-control" name="classid">
+                            @foreach($sc as $r)
+                                <option value="{{$r->classid}}"
+                                        @if($user->stuClassId==$r->classid)
+                                        selected
+                                        @endif
+                                >{{$r->className}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

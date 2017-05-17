@@ -74,6 +74,7 @@ class AdminController extends Controller
                 $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
             }
 
+            $u->stuClassId=$i['classid'];
             $u->isadmin=$i['role'];
             $u->userName=$i['name'];
             $u->stuBio=$i['bio'];
@@ -90,8 +91,9 @@ class AdminController extends Controller
         if ($request->isMethod('get')) {
             $this->viewinfo['title']='资料修改';
             $u=User::find($id);
+            $sc=cmClass::all();
             $c=cmClass::find($u->stuClassId);
-            return view('admin.profile')->withUser($u)->withClass($c)->withInfo($this->viewinfo);
+            return view('admin.profile')->withUser($u)->withSc($sc)->withClass($c)->withInfo($this->viewinfo);
         };
     }
 
