@@ -31,42 +31,47 @@
     <div class="infobox">
         <div class="row">
             @if($user->userName)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">昵称:</span>
-                <span class="col-md-4 col-xs-8 ">{{$user->userName}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">昵称:</span>
+                <span class="col-md-5 col-xs-8 ">{{$user->userName}}</span>
             @endif
+
             @if($user->stuName)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">真实姓名:</span>
-                <span class="col-md-4 col-xs-8">{{$user->stuName}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">姓名:</span>
+                <span class="col-md-5 col-xs-8">{{$user->stuName}}</span>
             @endif
+
             @if($user->stuNum)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">学号:</span>
-                <span class="col-md-4 col-xs-8">{{$user->stuNum}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">学号:</span>
+                <span class="col-md-5 col-xs-8">{{$user->stuNum}}</span>
             @endif
-            <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">性别:</span>
-            <span class="col-md-4 col-xs-8">
+
+            <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">性别:</span>
+            <span class="col-md-5 col-xs-8">
                 @if($user->stuSex=='male')
                     男
                 @else
                     女
                 @endif
             </span>
+
             @if($user->stuQQ)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">QQ:</span>
-                <span class="col-md-4 col-xs-8">{{$user->stuQQ}}</span>
-            @endif
-            @if($user->email)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">电子邮箱:</span>
-                <span class="col-md-4 col-xs-8">{{$user->email}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">QQ:</span>
+                <span class="col-md-5 col-xs-8 col-sm-12">{{$user->stuQQ}}</span>
             @endif
 
             @if($user->stuPhone)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">手机号:</span>
-                <span class="col-md-4 col-xs-8">{{$user->stuPhone}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">电话:</span>
+                <span class="col-md-5 col-xs-8">{{$user->stuPhone}}</span>
+            @endif
+
+            @if($user->email)
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">邮箱:</span>
+                <span class="col-md-5 col-xs-8">{{$user->email}}</span>
             @endif
 
             @if($user->stuBio)
-                <span class="col-md-4 col-xs-8 col-md-offset-1 text-primary">个人简介:</span>
-                <span class="col-md-10 col-xs-8 col-md-offset-1">&nbsp;&nbsp;&nbsp;&nbsp;{{$user->stuBio}}</span>
+                <span class="col-md-5 col-xs-8 text-primary">个人简介:</span>
+                <span class="col-md-11 col-xs-8 col-md-offset-1">{{$user->stuBio}}</span>
             @endif
 
         </div>

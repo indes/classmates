@@ -12,7 +12,7 @@
         <form class="form-horizontal" action="{{ url('/home') }}" method="post" role="form">
             {{csrf_field()}}
             <div class="form-group">
-                <textarea class="form-control" rows="4" name="pbinfo"></textarea>
+                <textarea class="form-control" rows="4" name="pbinfo" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="margin-left: 90%">发布</button>
         </form>
