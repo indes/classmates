@@ -27,7 +27,7 @@ class AccountController extends Controller
                     if(md5($i['oldpassword'])==$u->password){
                         $u->password=md5($i['newpassword']);
                         $u->save();
-                        return view('index.redirect')->withRdurl(url('\\'))->withMsg('修改成功！');
+                        return view('index.redirect')->withRdurl(url('home'))->withMsg('修改成功！');
 
                     }else{
                         return redirect()->back()->withInput()->withErrors('原密码错误！');

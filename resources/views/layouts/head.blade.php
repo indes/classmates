@@ -21,9 +21,6 @@
     <link href="{{url('/')}}/css/bootstrap.min.css" rel="stylesheet">
     <script src="{{url('/')}}/js/bootstrap.min.js"></script>
 
-    <link href="{{url('/')}}/css/bootstrapValidator.css" rel="stylesheet">
-    <script src="{{url('/')}}/js/bootstrapValidator.js"></script>
-
     <link rel="stylesheet" href="{{url('/')}}/css/flat-ui.min.css">
     <link rel="stylesheet" href="{{url('/')}}/css/style.css">
 
