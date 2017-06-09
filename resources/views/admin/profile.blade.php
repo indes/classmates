@@ -16,13 +16,13 @@
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label">Email</label>
                     <div class="col-lg-9">
-                        <input type="email" class="form-control" name="email" value="{{ $user->email }}">
+                        <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">昵称</label>
                     <div class="col-lg-9">
-                        <input type="" class="form-control" name="name" value="{{$user->userName}}">
+                        <input type="" class="form-control" name="name" value="{{$user->userName}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">真实姓名</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="rname" value="{{$user->stuName}}">
+                        <input type="text" class="form-control" name="rname" value="{{$user->stuName}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -70,19 +70,19 @@
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">学号</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="stunum" value="{{$user->stuNum}}">
+                        <input type="text" class="form-control" name="stunum" value="{{$user->stuNum}}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">QQ</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="QQ" value="{{$user->stuQQ}}">
+                        <input type="text" class="form-control" name="QQ" value="{{$user->stuQQ}}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-lg-3 control-label">手机号</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" name="phone" value="{{$user->stuPhone}}">
+                        <input type="text" class="form-control" name="phone" value="{{$user->stuPhone}}" required>
                     </div>
                 </div>
 

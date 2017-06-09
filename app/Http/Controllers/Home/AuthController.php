@@ -55,7 +55,7 @@ class AuthController extends Controller
 
             //密码合法性验证
             $this->validate($request, [
-                'Password' => 'required|alpha_dash|max:30|min:6',
+                'Password' => 'required|alpha_dash|max:18|min:6',
             ]);
 
 

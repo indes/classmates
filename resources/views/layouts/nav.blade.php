@@ -17,7 +17,7 @@
                 <ul class="nav navbar-nav">
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <form class="navbar-form navbar-left" action="{{url('search')}}" role="search">
+                    <form class="navbar-form navbar-left" action="{{url('search')}}" role="search" >
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" name="q" required="required">

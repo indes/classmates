@@ -9,19 +9,21 @@
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label">原密码</label>
                     <div class="col-lg-9">
-                        <input type="password" class="form-control" name="oldpassword">
+                        <input type="password" class="form-control" name="oldpassword" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label">新密码</label>
                     <div class="col-lg-9">
-                        <input type="password" class="form-control" name="newpassword">
+                        <input type="password" class="form-control" name="newpassword" required pattern="^[\d_a-zA-Z]{6,18}$" title="6-18位，只能是字母、数字和下划线">
+                        <small>6-18位，只能是字母、数字和下划线</small>
+
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label">确认新密码</label>
                     <div class="col-lg-9">
-                        <input type="password" class="form-control" name="rnewpassword">
+                        <input type="password" class="form-control" name="rnewpassword" required pattern="^[\d_a-zA-Z]{6,18}$" title="6-18位，只能是字母、数字和下划线">
                         @if (count($errors) > 0)
                             <span id="helpBlock" class="help-block text-danger" style="color: red">{!! implode('<br>', $errors->all()) !!}</span>
                         @endif
