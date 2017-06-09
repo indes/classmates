@@ -14,9 +14,12 @@ class AccountController extends Controller
 {
     private $viewinfo=array('active'=>'set');
 
-    public function pwdset()
+    public function pwdset(Request $request)
     {
         $i=Input::get();
+        $this->validate($request, [
+            'newpassword' => 'required|alpha_dash|max:30|min:6',
+        ]);
         if($i['oldpassword']){
             if($i['newpassword']&&$i['rnewpassword']){
                 if($i['newpassword']==$i['rnewpassword']){
@@ -60,7 +63,10 @@ class AccountController extends Controller
             $u->stuPhone=$i['phone'];
             $u->stuNum=$i['stunum'];
             $u->email=$i['email'];
+
             $u->save();
+            session(['user'=>$u]);
+
             return view('index.redirect')->withRdurl(url('home'))->withMsg("修改成功！");
 
         };

@@ -61,12 +61,12 @@ Route::group(['prefix' => 'account','middleware'=>'uauth'], function () {
     });
 });
 
-
 Route::group(['prefix' => 'class','middleware'=>'uauth'], function () {
     Route::get('/','cmClassController@index');
     Route::get('/members','cmClassController@mbr');
 });
 
+Route::any('/first','AccountController@profileset');
 
 Route::get('/set',function (){
     session(['admin'=>123]);

@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="" class="col-lg-2 control-label"></label>
                 <div class="col-lg-6">
-                    <input type="file" name="upfile"/>
+                    <input type="file" name="upfile" required/>
                 </div>
                 <div class="col-lg-3">
                     <button type="submit" class="btn btn-primary btn-sm">上传</button>

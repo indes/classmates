@@ -50,7 +50,7 @@
     <script>
         function delJ(jid)
         {
-            var r=confirm("确认删除该文件？");
+            var r=confirm("确认删除该动态？");
             if (r==true){
                 //使用ajax方式删除文件
                 var obj=$.ajax({

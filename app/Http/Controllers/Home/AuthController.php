@@ -4,14 +4,17 @@ namespace Classmate\Http\Controllers\Home;
 
 use Classmate\Http\Model\cmClass;
 use Classmate\http\Model\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use Classmate\Http\Requests;
 use Classmate\Http\Controllers\Controller;
+use Illuminate\Validation\Validator;
 
 class AuthController extends Controller
 {
+
     public function login()
     {
         $i=Input::get();
@@ -46,8 +49,16 @@ class AuthController extends Controller
     {
 
         if ($request->isMethod('post')) {
-//            注册用户
+
+            //注册用户
             $i=Input::get();
+
+            //密码合法性验证
+            $this->validate($request, [
+                'Password' => 'required|alpha_dash|max:30|min:6',
+            ]);
+
+
             if($i['email']&&$i['name']&&$i['Password']&&$i['confirmPassword']&&$i['classid']){
                 if($i['Password']==$i['confirmPassword']){
                     //判断邮箱是否存在
