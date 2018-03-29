@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "indes/classmates",
+    "description": "Simple website based on Laravel",
+    "keywords": ["laravel", "website"],
     "license": "MIT",
     "type": "project",
     "require": {
