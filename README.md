@@ -1,7 +1,10 @@
 # 同学录
 基于Laravel的简单同学录
 
-## Install
+## 预览
+![登录](https://github.com/indes/classmates/raw/master/images/localhost_8000_auth_login.png)
+
+## 安装
 
 ### 1. Clone the source code or create new project.
 
