@@ -2,7 +2,10 @@
 基于Laravel的简单同学录
 
 ## 预览
-![登录](https://github.com/indes/classmates/raw/master/images/localhost_8000_auth_login.png)
+![登录](https://github.com/indes/classmates/raw/master/images/localhost_8000_auth_login.jpg)
+![注册](https://github.com/indes/classmates/raw/master/images/localhost_8000_auth_signup.jpg)
+![主页](https://github.com/indes/classmates/raw/master/images/localhost_8000_index.jpg)
+![班级](https://github.com/indes/classmates/raw/master/images/localhost_8000_class.jpg)
 
 ## 安装
 
