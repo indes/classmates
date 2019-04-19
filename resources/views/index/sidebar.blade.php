@@ -70,8 +70,9 @@
             @endif
 
             @if($user->stuBio)
-                <span class="col-md-5 col-xs-8 text-primary">个人简介:</span>
-                <span class="col-md-11 col-xs-8 col-md-offset-1">{{$user->stuBio}}</span>
+                <span class="col-md-3 col-xs-8 col-md-offset-1 text-primary">简介:</span>
+
+                <span class="col-md-5 col-xs-8">{{$user->stuBio}}</span>
             @endif
 
         </div>
