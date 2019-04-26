@@ -1,6 +1,7 @@
 <?php
 
 namespace Classmate\Http\Controllers;
+
 use Classmate\Http\Model\cmClass;
 use DB;
 use Classmate\Http\Model\Journal;
@@ -13,21 +14,21 @@ use Classmate\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
-    private $viewinfo=array('active'=>'index');
+    private $viewinfo = array('active' => 'index');
 
     public function index()
     {
         //从数据库中取出相关动态
-        $j=DB::table('cm_journal')
+        $j = DB::table('cm_journal')
             ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
-            ->where('stuClassId',session('user')->stuClassId)
+            ->where('stuClassId', session('user')->stuClassId)
             ->orderBy('jPublishDate', 'desc')
             ->paginate(6);
-        $u=session('user');
-        $u->jcount=Journal::where('jAuthorId',$u->id)->get()->count();
-        $u->classcount=User::where('stuClassId',$u->stuClassId)->get()->count();
-//        dd($u);
-        $this->viewinfo['title']='首页';
+        $u = session('user');
+        $u->jcount = Journal::where('jAuthorId', $u->id)->get()->count();
+        $u->classcount = User::where('stuClassId', $u->stuClassId)->get()->count();
+
+        $this->viewinfo['title'] = '首页';
         return view('index.index')->withUser($u)->withJournals($j)->withInfo($this->viewinfo);
     }
 
@@ -40,29 +41,29 @@ class IndexController extends Controller
 
     public function search()
     {
-        if(isset($_GET['q'])&&$_GET['q']!=''){
+        if (isset($_GET['q']) && $_GET['q'] != '') {
 
-            $res['key']=$_GET['q'];
-            $q='%'.$_GET['q'].'%';
-            $res['u']=User::where('stuName','like',$q)->orWhere('userName','like',$q)->get();
-            $res['c']=cmClass::where('className','like',$q)->get();
-            $res['j']=collect(DB::table('cm_journal')
+            $res['key'] = $_GET['q'];
+            $q = '%' . $_GET['q'] . '%';
+            $res['u'] = User::where('stuName', 'like', $q)->orWhere('userName', 'like', $q)->get();
+            $res['c'] = cmClass::where('className', 'like', $q)->get();
+            $res['j'] = collect(DB::table('cm_journal')
                 ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
-                ->where('jData','like',$q)
+                ->where('jData', 'like', $q)
                 ->orderBy('jPublishDate', 'desc')
                 ->get());
-            $this->viewinfo['title']='\''.$res['key'].'\'的搜索结果';
+            $this->viewinfo['title'] = '\'' . $res['key'] . '\'的搜索结果';
 
             return view('index.search')->withRes($res)->withInfo($this->viewinfo);
-        }else{
+        } else {
             return view('index.redirect')->withMsg("请输入关键词！")->withRdurl(url('/'));
         }
     }
 
     public function test()
     {
-        $u=User::where('id',11)->get();
-        Header( "Content-type: image/gif");
+        $u = User::where('id', 11)->get();
+        Header("Content-type: image/gif");
         echo $u[0]->stuImg;
     }
 

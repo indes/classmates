@@ -37,13 +37,15 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
 //    protected $hidden = ['password', 'remember_token'];
-    public static function get($id)
+
+
+    public static function getById($id)
     {
-        $redis = new Redis();
+
         $redis_user = Redis::hGetAll("user:profile:" . $id);
         if ($redis_user) {
             $user = new User();
-            foreach ($redis_user as $key=>$value){
+            foreach ($redis_user as $key => $value) {
                 $user->$key = $value;
             }
 //            $user->name = $redis_user['userName'];

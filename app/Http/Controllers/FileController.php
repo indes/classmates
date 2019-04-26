@@ -14,10 +14,9 @@ use Classmate\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 
-
 class FileController extends Controller
 {
-    private $viewinfo=array('active'=>'file');
+    private $viewinfo = array('active' => 'file');
 
     /**
      * Display a listing of the resource.
@@ -27,15 +26,15 @@ class FileController extends Controller
     public function index()
     {
         //
-        $f=collect(
+        $f = collect(
             DB::table('cm_files')
-            ->leftJoin('cm_user', 'cm_files.userid', '=', 'cm_user.id')
-            ->where('classid',session('user')->stuClassId)
-            ->where('status','1')
-            ->orderBy('created_at','desc')
-            ->get()
+                ->leftJoin('cm_user', 'cm_files.userid', '=', 'cm_user.id')
+                ->where('classid', session('user')->stuClassId)
+                ->where('status', '1')
+                ->orderBy('created_at', 'desc')
+                ->get()
         );
-        $this->viewinfo['title']='文件共享';
+        $this->viewinfo['title'] = '文件共享';
 
 //        $f=ClassFiles::where('classid',session('user')->stuClassId)
 //            ->where('status','1')
@@ -54,7 +53,7 @@ class FileController extends Controller
     public function create()
     {
         //
-        $this->viewinfo['title']='文件上传';
+        $this->viewinfo['title'] = '文件上传';
 
         return view('class.upload')->withInfo($this->viewinfo);
 
@@ -63,38 +62,38 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if($request->hasFile('upfile')){
-            $file=$request->file('upfile');
+        if ($request->hasFile('upfile')) {
+            $file = $request->file('upfile');
 //            $filename=iconv("utf-8","gbk",$file->getClientoriginalName());
 
             //使用时间戳+用户id重命名文件以避免重名文件
-            $path='classfiles\\'.session('user')->stuClassId.'\\'.time().'-'.session('user')->id.'.'.$file->guessClientExtension();
+            $path = 'classfiles\\' . session('user')->stuClassId . '\\' . time() . '-' . session('user')->id . '.' . $file->guessClientExtension();
 
             //数据库操作
-            $f=new ClassFiles();
-            $f->userid=session('user')->id;
-            $f->classid=session('user')->stuClassId;
-            $f->name=$file->getClientoriginalName();
-            $f->type=$file->getClientmimeType();
-            $f->size=$file->getClientSize();
-            $f->path=$path;
-            $f->status=1;
+            $f = new ClassFiles();
+            $f->userid = session('user')->id;
+            $f->classid = session('user')->stuClassId;
+            $f->name = $file->getClientoriginalName();
+            $f->type = $file->getClientmimeType();
+            $f->size = $file->getClientSize();
+            $f->path = $path;
+            $f->status = 1;
             $f->save();
 //            echo $file->getRealPath();
 
             //文件复制
-            $d=Storage::disk('local')->put(
+            $d = Storage::disk('local')->put(
                 $path, file_get_contents($file->getRealPath())
             );
 
-            if($d){
+            if ($d) {
                 return view('index.redirect')->withRdurl(url('class\file'))->withMsg("上传成功！");
-            }else{
+            } else {
                 return view('index.redirect')->withRdurl(url('class\file'))->withMsg("上传失败！");
             }
         }
@@ -107,24 +106,24 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
         //文件下载
-        $f=ClassFiles::where('fileid',$id)->first();
-        $path=storage_path().'\app\\'.$f->path;
+        $f = ClassFiles::where('fileid', $id)->first();
+        $path = storage_path() . '\app\\' . $f->path;
 //        dd($path);
-        return response()->download($path,$f->name);
+        return response()->download($path, $f->name);
 //        dd(Storage::disk('local')->get($f->path));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -135,8 +134,8 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -147,27 +146,27 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $rearr=array("fileid"=>$id);
-        $f=ClassFiles::where('fileid',$id)->first();
+        $rearr = array("fileid" => $id);
+        $f = ClassFiles::where('fileid', $id)->first();
         //权限验证
-        if($f->userid!=session('user')->id&&session('user')->isadmin!=1){
-            $rearr['status']=0;
-            $rearr['errmsg']='没有权限';
+        if ($f->userid != session('user')->id && session('user')->isadmin != 1) {
+            $rearr['status'] = 0;
+            $rearr['errmsg'] = '没有权限';
             return response()->json($rearr);
-        }else{
-            $r=Storage::disk('local')->delete($f->path);
-            if($r){
-                $f->status=2;
+        } else {
+            $r = Storage::disk('local')->delete($f->path);
+            if ($r) {
+                $f->status = 2;
                 $f->save();
-                $rearr['status']=1;
-            }else{
-                $rearr['status']=0;
-                $rearr['errmsg']='';
+                $rearr['status'] = 1;
+            } else {
+                $rearr['status'] = 0;
+                $rearr['errmsg'] = '';
             }
             return response()->json($rearr);
         }

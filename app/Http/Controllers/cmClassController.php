@@ -14,22 +14,24 @@ use DB;
 class cmClassController extends Controller
 {
     private $c;
-    private $viewinfo=array('active'=>'class');
-    function __construct(){
-        $this->c=cmClass::find(session('user')->stuClassId);
-        $this->c->members=User::where('stuClassId',session('user')->stuClassId)->get();
-        $j=collect(DB::table('cm_journal')
+    private $viewinfo = array('active' => 'class');
+
+    function __construct()
+    {
+        $this->c = cmClass::find(session('user')->stuClassId);
+        $this->c->members = User::where('stuClassId', session('user')->stuClassId)->get();
+        $j = collect(DB::table('cm_journal')
             ->leftJoin('cm_user', 'cm_journal.jAuthorId', '=', 'cm_user.id')
-            ->where('stuClassId',session('user')->stuClassId)
+            ->where('stuClassId', session('user')->stuClassId)
             ->orderBy('jPublishDate', 'desc')
             ->get());
-        $this->c->Journals=$j;
+        $this->c->Journals = $j;
 
-        $f=ClassFiles::where('classid',session('user')->stuClassId)
-            ->where('status','1')
-            ->orderBy('created_at','desc')
+        $f = ClassFiles::where('classid', session('user')->stuClassId)
+            ->where('status', '1')
+            ->orderBy('created_at', 'desc')
             ->get()->count();
-        $this->c->filenum=$f;
+        $this->c->filenum = $f;
     }
 
     /**
@@ -39,21 +41,22 @@ class cmClassController extends Controller
      */
     public function index()
     {
-        $this->viewinfo['title']='班级';
+        $this->viewinfo['title'] = '班级';
         return view('class.index')->withClass($this->c)->withInfo($this->viewinfo);
     }
 
 
     public function files()
     {
-        $this->viewinfo['active']='file';
-        $this->viewinfo['title']='文件';
+        $this->viewinfo['active'] = 'file';
+        $this->viewinfo['title'] = '文件';
         return view('class.files')->withInfo($this->viewinfo);
 
     }
+
     public function mbr()
     {
-        $this->viewinfo['title']='班级成员';
+        $this->viewinfo['title'] = '班级成员';
         return view('class.member')->withClass($this->c)->withInfo($this->viewinfo);
     }
 

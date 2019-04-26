@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
 
         if (!isset($id)) $id = session('user')->id;
-        $u = User::get($id);
+        $u = User::getById($id);
         $j = Journal::where('jAuthorId', $id)->orderBy('jPublishDate', 'desc')->paginate(6);
         $j->count = Journal::where('jAuthorId', $id)->get()->count();
 

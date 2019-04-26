@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
 {
-    private $viewinfo=array('active'=>'admin');
+    private $viewinfo = array('active' => 'admin');
 
     function __construct()
     {
-        if(session('user')->isadmin!=1){
+        if (session('user')->isadmin != 1) {
 //            echo "没有权限";
 //            return view('index.redirect')->withRdurl(url('\\'))->withMsg('当前账户没有管理权限！');
         }
@@ -28,71 +28,75 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $this->viewinfo['title']='后台管理';
+        $this->viewinfo['title'] = '后台管理';
         return view('admin.admin')->withInfo($this->viewinfo);
     }
 
 
-    public function user($id=null){
-        $this->viewinfo['title']='用户管理';
-        $u=collect(
+    public function user($id = null)
+    {
+        $this->viewinfo['title'] = '用户管理';
+        $u = collect(
             DB::table('cm_user')
-                ->leftJoin('cm_class','cm_user.stuClassId','=','cm_class.classid')
+                ->leftJoin('cm_class', 'cm_user.stuClassId', '=', 'cm_class.classid')
                 ->get()
         );
         return view('admin.user')->withInfo($this->viewinfo)->withUsers($u);
     }
 
 
-    public function pwd(Request $request,$id)
+    public function pwd(Request $request, $id)
     {
         if ($request->isMethod('post')) {
-            $i=Input::get();
-            if($i['newpassword']==$i['rnewpassword']){
-                $u=User::find($id);
-                $u->password=md5($i['newpassword']);
+            $i = Input::get();
+            if ($i['newpassword'] == $i['rnewpassword']) {
+                $u = User::find($id);
+                $u->password = md5($i['newpassword']);
                 $u->save();
                 return view('index.redirect')->withRdurl(url('admin\user'))->withMsg('修改成功！');
 
-            }else{
+            } else {
                 return redirect()->back()->withErrors('两次输入密码不相同！');
             }
         };
 
         if ($request->isMethod('get')) {
-            $this->viewinfo['title']='密码修改';
+            $this->viewinfo['title'] = '密码修改';
             return view('admin.pwd')->withInfo($this->viewinfo)->withId($id);
         };
     }
 
-    public function profile(Request $request,$id)
+    public function profile(Request $request, $id)
     {
         if ($request->isMethod('post')) {
-            $i=Input::get();
-            $u=User::find($id);
-            if($request->file('stuimg')){
-                $u->stuImg=file_get_contents($request->file('stuimg')->getRealPath());
+            $i = Input::get();
+            $u = User::getById($id);
+//            $u = User::find($id);
+            if ($request->file('stuimg')) {
+                $u->stuImg = file_get_contents($request->file('stuimg')->getRealPath());
             }
 
-            $u->stuClassId=$i['classid'];
-            $u->isadmin=$i['role'];
-            $u->userName=$i['name'];
-            $u->stuBio=$i['bio'];
-            $u->stuName=$i['rname'];
-            $u->stuSex=$i['sex'];
-            $u->stuQQ=$i['QQ'];
-            $u->stuPhone=$i['phone'];
-            $u->stuNum=$i['stunum'];
-            $u->email=$i['email'];
+            $u->stuClassId = $i['classid'];
+            $u->isadmin = $i['role'];
+            $u->userName = $i['name'];
+            $u->stuBio = $i['bio'];
+            $u->stuName = $i['rname'];
+            $u->stuSex = $i['sex'];
+            $u->stuQQ = $i['QQ'];
+            $u->stuPhone = $i['phone'];
+            $u->stuNum = $i['stunum'];
+            $u->email = $i['email'];
             $u->save();
             return view('index.redirect')->withRdurl(url('admin/user'))->withMsg("修改成功！");
         };
 
         if ($request->isMethod('get')) {
-            $this->viewinfo['title']='资料修改';
-            $u=User::find($id);
-            $sc=cmClass::all();
-            $c=cmClass::find($u->stuClassId);
+            $this->viewinfo['title'] = '资料修改';
+//            $u = User::getById($id);
+
+            $u = User::find($id);
+            $sc = cmClass::all();
+            $c = cmClass::find($u->stuClassId);
             return view('admin.profile')->withUser($u)->withSc($sc)->withClass($c)->withInfo($this->viewinfo);
         };
     }
@@ -100,61 +104,63 @@ class AdminController extends Controller
     public function classadd(Request $request)
     {
         if ($request->isMethod('post')) {
-            $i=Input::get();
-            if(isset($i['classname'])&&isset($i['major'])){            //数据验证
-                $c=new cmClass();
-                $c->classname=$i['classname'];
-                $c->major=$i['major'];
+            $i = Input::get();
+            if (isset($i['classname']) && isset($i['major'])) {            //数据验证
+                $c = new cmClass();
+                $c->classname = $i['classname'];
+                $c->major = $i['major'];
                 $c->save();
                 return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("添加成功！");
-            }else{
+            } else {
                 return redirect()->back()->withInput()->withErrors('所有信息都要填写！');
             }
 
         };
 
         if ($request->isMethod('get')) {
-            $this->viewinfo['title']='添加班级';
+            $this->viewinfo['title'] = '添加班级';
             return view('admin.classadd')->withInfo($this->viewinfo);
         };
     }
 
-    public function classdel($id){
+    public function classdel($id)
+    {
 
-        $c=cmClass::where('classid','=',$id);
+        $c = cmClass::where('classid', '=', $id);
         $c->delete();
         return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("删除成功！");
     }
-    public function classadmin(Request $request,$id=null)
+
+    public function classadmin(Request $request, $id = null)
     {
 
         if ($request->isMethod('post')) {
-            $i=Input::get();
-            if(isset($i['classname'])&&isset($i['major'])){            //数据验证
-                $c=cmClass::where('classid','=',$id)->first();
-                $c->classname=$i['classname'];
-                $c->major=$i['major'];
+            $i = Input::get();
+            if (isset($i['classname']) && isset($i['major'])) {            //数据验证
+                $c = cmClass::where('classid', '=', $id)->first();
+                $c->classname = $i['classname'];
+                $c->major = $i['major'];
                 $c->save();
                 return view('index.redirect')->withRdurl(url('admin/class'))->withMsg("修改成功！");
-            }else{
+            } else {
                 return redirect()->back()->withErrors('所有信息都要填写！');
             }
 
         };
 
         if ($request->isMethod('get')) {
-            if ($id!=null){
+            if ($id != null) {
                 //展示班级详情
-                $this->viewinfo['title']='班级修改';
+                $this->viewinfo['title'] = '班级修改';
 
-                $c=cmClass::where('classid','=',$id)->get();
+                $c = cmClass::where('classid', '=', $id)->get();
 //                dd($c);
                 return view('admin.classset')->withClass($c)->withInfo($this->viewinfo);
 
-            }else{
+            } else {
                 //展示班级列表
-                $c=DB::select('select a.*,count(b.id) as count from cm_class a  LEFT JOIN cm_user b on a.classid = b.stuClassid group by a.classid;');
-                $this->viewinfo['title']='班级管理';
+                $c = DB::select('select a.*,count(b.id) as count from cm_class a  LEFT JOIN cm_user b on a.classid = b.stuClassid group by a.classid;');
+                $this->viewinfo['title'] = '班级管理';
                 return view('admin.class')->withClasses($c)->withInfo($this->viewinfo);
             }
         };
@@ -163,13 +169,13 @@ class AdminController extends Controller
 
     public function file()
     {
-        $this->viewinfo['title']='文件管理';
-        $f=collect(
+        $this->viewinfo['title'] = '文件管理';
+        $f = collect(
             DB::table('cm_files')
                 ->leftJoin('cm_user', 'cm_files.userid', '=', 'cm_user.id')
-                ->leftJoin('cm_class','cm_files.classid','=','cm_class.classid')
-                ->where('status','1')
-                ->orderBy('created_at','desc')
+                ->leftJoin('cm_class', 'cm_files.classid', '=', 'cm_class.classid')
+                ->where('status', '1')
+                ->orderBy('created_at', 'desc')
                 ->get()
         );
         return view('admin.file')->withInfo($this->viewinfo)->withFiles($f);

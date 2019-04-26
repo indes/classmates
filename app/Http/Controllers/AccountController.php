@@ -23,6 +23,7 @@ class AccountController extends Controller
         if($i['oldpassword']){
             if($i['newpassword']&&$i['rnewpassword']){
                 if($i['newpassword']==$i['rnewpassword']){
+//                    $u = User::getById(session('user')->id);
                     $u=User::find(session('user')->id);
                     if(md5($i['oldpassword'])==$u->password){
                         $u->password=md5($i['newpassword']);
@@ -72,7 +73,8 @@ class AccountController extends Controller
         };
         if ($request->isMethod('get')) {
             $this->viewinfo['title']='资料修改';
-            $u=User::find(session('user')->id);
+            $u = User::getById(session('user')->id);
+//            $u=User::find(session('user')->id);
             $c=cmClass::find($u->stuClassId);
             $sc=cmClass::all();
             return view('set.profile')->withUser($u)->withClass($c)->withSc($sc)->withInfo($this->viewinfo);
